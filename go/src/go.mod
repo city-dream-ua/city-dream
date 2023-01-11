@@ -12,10 +12,10 @@ require (
 	github.com/joho/godotenv v1.4.0
 	github.com/kpango/glg v1.6.12
 	github.com/lib/pq v1.10.6
-	github.com/pressly/goose v2.7.0+incompatible
 	github.com/stretchr/testify v1.8.0
 	gorm.io/driver/postgres v1.3.9
-	gorm.io/gorm v1.23.8
+	gorm.io/driver/sqlite v1.4.4
+	gorm.io/gorm v1.24.0
 )
 
 require (
@@ -35,7 +35,7 @@ require (
 	github.com/jackc/pgtype v1.11.0 // indirect
 	github.com/jackc/pgx/v4 v4.16.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
-	github.com/jinzhu/now v1.1.4 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/kpango/fastime v1.1.4 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect

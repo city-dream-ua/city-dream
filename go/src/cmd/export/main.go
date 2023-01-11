@@ -3,11 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	dreamRepo "github.com/City-Dream/backend/services/dream/db/postgreSql/repository"
+
+	"github.com/City-Dream/backend/repository"
 )
 
 func main() {
-	var dRepo = dreamRepo.Dream{}
+	var dRepo = repository.Dream{}
 	ds := dRepo.GetAll()
 
 	o, err := json.Marshal(&ds)

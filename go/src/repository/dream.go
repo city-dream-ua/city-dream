@@ -2,14 +2,12 @@ package repository
 
 import (
 	"github.com/google/uuid"
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 
-	"github.com/City-Dream/backend/services/dream/config"
-	"github.com/City-Dream/backend/services/dream/db/postgreSql/model"
+	"github.com/City-Dream/backend/config"
+	"github.com/City-Dream/backend/model"
 )
-
-var err error
 
 type Dream struct {
 	conn *gorm.DB
@@ -34,7 +32,7 @@ func (r *Dream) CreateDream(d *model.Dream) error {
 
 func (r *Dream) getConn() *gorm.DB {
 	if r.conn == nil {
-		r.conn, err = gorm.Open(postgres.Open(config.FromEnv().DbDSN), &gorm.Config{})
+		r.conn, err = gorm.Open(sqlite.Open(config.FromEnv().DbDSN), &gorm.Config{})
 
 		if err != nil {
 			panic(err)

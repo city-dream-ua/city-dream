@@ -6,12 +6,12 @@ import (
 	"os"
 	"time"
 
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 
-	"github.com/City-Dream/backend/services/user/config"
-	"github.com/City-Dream/backend/services/user/db/postgreSql/model"
+	"github.com/City-Dream/backend/config"
+	"github.com/City-Dream/backend/model"
 )
 
 var err error
@@ -55,7 +55,7 @@ func (r *User) getConn() *gorm.DB {
 			},
 		)
 
-		r.conn, err = gorm.Open(postgres.Open(config.FromEnv().DbDSN), &gorm.Config{Logger: newLogger})
+		r.conn, err = gorm.Open(sqlite.Open(config.FromEnv().DbDSN), &gorm.Config{Logger: newLogger})
 
 		if err != nil {
 			panic(err)

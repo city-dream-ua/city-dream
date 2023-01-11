@@ -2,15 +2,15 @@ package main
 
 import (
 	"fmt"
-	dreamRepo "github.com/City-Dream/backend/services/dream/db/postgreSql/repository"
-	"github.com/City-Dream/backend/services/trello/import/mapping"
-	"github.com/City-Dream/backend/services/user/db/postgreSql/model"
-	userRepo "github.com/City-Dream/backend/services/user/db/postgreSql/repository"
-	"github.com/joho/godotenv"
 
 	"github.com/adlio/trello"
 	"github.com/caarlos0/env/v6"
+	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
+
+	"github.com/City-Dream/backend/model"
+	"github.com/City-Dream/backend/model/mapping"
+	"github.com/City-Dream/backend/repository"
 )
 
 type Config struct {
@@ -19,8 +19,8 @@ type Config struct {
 	BoardId string `env:"TRELLO_BOARD_ID,required"`
 }
 
-var dRepo = dreamRepo.Dream{}
-var uRepo = userRepo.User{}
+var dRepo = repository.Dream{}
+var uRepo = repository.User{}
 
 func main() {
 	err := godotenv.Load()
