@@ -9,7 +9,6 @@ type Dream struct {
 	Owner       User
 	ManagerID   uint
 	Manager     User
-	DreamStage  DreamStage
 	Status      string
 	Resources   []Resource
 }

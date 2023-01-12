@@ -14,8 +14,8 @@ func main() {
 		MustGetConn().
 		Joins("Owner").
 		Preload("Manager").
-		Preload("DreamStage").
 		Preload("Resources").
+		Preload("Resources.DreamStage").
 		Find(&dreams)
 
 	o, err := json.Marshal(&dreams)
