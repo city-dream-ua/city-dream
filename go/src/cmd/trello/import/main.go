@@ -2,19 +2,15 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"time"
 
 	"github.com/adlio/trello"
 	_ "github.com/joho/godotenv/autoload"
-	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 
 	"github.com/City-Dream/backend/config"
 	"github.com/City-Dream/backend/model"
 	"github.com/City-Dream/backend/model/mapping"
+	"github.com/City-Dream/backend/repository"
 )
 
 var (
@@ -24,7 +20,7 @@ var (
 )
 
 func main() {
-	dbConnect()
+	db = repository.MustGetConn()
 
 	client := trello.NewClient(cfg.AppKey, cfg.Token)
 	board, err := client.GetBoard(cfg.BoardId, trello.Defaults())
@@ -70,20 +66,6 @@ func main() {
 			}
 		}
 	}
-}
-
-func dbConnect() {
-	newLogger := logger.New(
-		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
-		logger.Config{
-			SlowThreshold:             time.Second,   // Slow SQL threshold
-			LogLevel:                  logger.Info, // Log level
-			IgnoreRecordNotFoundError: false,         // Ignore ErrRecordNotFound error for logger
-			Colorful:                  true,         // Disable color
-		},
-	)
-	db, err = gorm.Open(sqlite.Open(config.FromEnv().DbDSN), &gorm.Config{Logger: newLogger})
-	checkErr(err)
 }
 
 func getUser(m *trello.Member) (u *model.User) {
