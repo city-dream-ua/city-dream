@@ -18,8 +18,8 @@ func main() {
 		&model.User{},
 		&model.Dream{},
 		&model.DreamStage{},
-		&model.Resources{},
-		&model.Contributions{})
+		&model.Resource{},
+		&model.Contribution{})
 	checkErr(err)
 }
 
