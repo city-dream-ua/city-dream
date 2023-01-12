@@ -3,12 +3,13 @@ package mapping
 import (
 	"database/sql"
 	"fmt"
-	"github.com/City-Dream/backend/services/user/db/postgreSql/model"
 	"strings"
 
 	"github.com/adlio/trello"
 	"github.com/google/uuid"
 	"github.com/lib/pq"
+
+	"github.com/City-Dream/backend/model"
 )
 
 var avatarSize = 170
