@@ -21,11 +21,12 @@ export type ProjectCardProps = {
   authorFirstName: string;
   authorLastName: string;
   description: string;
+  slug: string;
 }
 
 export const ProjectCard: FC<ProjectCardProps> = (
   {
-    id,
+    slug,
     src,
     alt,
     title,
@@ -45,7 +46,7 @@ export const ProjectCard: FC<ProjectCardProps> = (
   };
 
   return (
-    <Link href={`/project/${id}`}>
+    <Link href={`/project/${slug}`}>
       <Card
         elevation={elevation}
         onMouseOver={onMouseOver}

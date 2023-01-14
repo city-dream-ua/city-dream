@@ -14,6 +14,7 @@ export const projectsContext = createContext<{
     authorFirstName: '',
     authorLastName: '',
     description: '',
+    slug: '',
   },
   projects: null,
 });

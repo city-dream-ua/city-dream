@@ -8,6 +8,7 @@ const normalizeTrelloData = (
     Title,
     CoverImage,
     Description,
+    ShortLink,
     Owner: {
       FirstName: {
         String: firstName,
@@ -28,6 +29,7 @@ const normalizeTrelloData = (
   authorFirstName: firstName,
   authorLastName: lastName,
   description: Description,
+  slug: ShortLink,
 })
 
 const CORE_API = 'https://api.citydream.pp.ua/api'
@@ -40,8 +42,8 @@ export const getProjects = async (): Promise<ProjectCardProps[] | null> => {
   return res?.map(normalizeTrelloData) || null;
 }
 
-export const getProject = async (id: string): Promise<ProjectCardProps | null> => {
-  const res: TrelloProjectCardProps = await fetch(`${CORE_API}/${id}`)
+export const getProject =  async (slug: string): Promise<ProjectCardProps | null> => {
+  const res: TrelloProjectCardProps = await fetch(`${CORE_API}/dreams/${slug}.json`)
     .then(data => data.json())
     .catch(err => console.error(err));
 

@@ -30,8 +30,8 @@ const ProjectPage: FC<ProjectPageProps> = ({ projects, project }) => {
 
 export const getStaticPaths = async () => {
   const projects = await getProjects();
-  const paths = projects?.map(({ id }) => ({
-    params: { id },
+  const paths = projects?.map(({ slug }) => ({
+    params: { slug },
   })) || [];
 
   return {
@@ -41,12 +41,11 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const id = context.params?.id as string | undefined;
+  const slug = context.params?.slug as string | undefined;
 
-  // TODO: replace when we have correct endpoint for getting project data
+  // TODO: cache projects after first request
   const projects = await getProjects();
-  const project = projects?.find(({ id: projectId }) => id === projectId);
-  // const project = id ? await getProject(id) : null;
+  const project = slug ? await getProject(slug) : null;
 
   return {
     props: {

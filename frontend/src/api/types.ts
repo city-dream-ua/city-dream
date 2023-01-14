@@ -25,4 +25,5 @@ export type TrelloProjectCardProps = {
   ManagerID: string;
   Manager: TrelloPerson;
   Status: string;
+  ShortLink: string;
 }
