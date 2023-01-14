@@ -29,6 +29,7 @@ export default NextAuth({
       return token;
     },
   },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/auth/sign-in',
   }
