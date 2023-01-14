@@ -2,7 +2,8 @@ name: deploy lambda
 on: [push]
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-20.04
+    using: 'docker'
+    image: 'Dockerfile'
     steps:
       - uses: actions/checkout@v2
         with:
