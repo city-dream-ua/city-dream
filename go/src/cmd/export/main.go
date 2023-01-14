@@ -8,8 +8,8 @@ import (
 )
 
 var (
-	store = storage.NewS3()
-    dreams []*model.Dream
+	store  = storage.NewS3()
+	dreams []*model.Dream
 )
 
 func main() {
