@@ -20,7 +20,7 @@ export const Project = () => {
              <Description/>
               <Box mt={'58px'}>
                 <Button variant={'contained'} size={'large'}>
-                  Підтримати мріяю
+                  Підтримати мрію
                 </Button>
               </Box>
             </Grid>
