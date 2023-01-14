@@ -2,16 +2,19 @@ package main
 
 import (
 	"context"
-	"github.com/City-Dream/backend/api/trello/router"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"
+
+	"github.com/City-Dream/backend/api/router"
 )
 
 var ginLambda *ginadapter.GinLambda
 
 func init() {
-	ginLambda = ginadapter.New(router.New())
+	r := router.New()
+	ginLambda = ginadapter.New(r)
 }
 
 func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {

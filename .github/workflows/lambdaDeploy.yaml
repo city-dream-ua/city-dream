@@ -1,0 +1,19 @@
+name: deploy lambda
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Build lambda
+        run: |
+          cd go/src
+          bash api/lambda/build.sh
+
+      - name: Deploy lambda
+        run: |
+          cd go/src
+          bash api/lambda/deploy.sh
