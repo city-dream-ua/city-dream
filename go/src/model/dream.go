@@ -3,6 +3,7 @@ package model
 type Dream struct {
 	ID          string
 	Title       string
+	ShortLink   string
 	CoverImage  string
 	Description string
 	OwnerID     uint

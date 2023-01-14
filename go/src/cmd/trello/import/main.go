@@ -10,7 +10,7 @@ import (
 	"github.com/City-Dream/backend/config"
 	"github.com/City-Dream/backend/model"
 	"github.com/City-Dream/backend/model/mapping"
-	"github.com/City-Dream/backend/repository"
+	"github.com/City-Dream/backend/storage"
 )
 
 var (
@@ -20,7 +20,7 @@ var (
 )
 
 func main() {
-	db = repository.MustGetConn()
+	db = storage.MustGetConn()
 
 	client := trello.NewClient(cfg.AppKey, cfg.Token)
 	board, err := client.GetBoard(cfg.BoardId, trello.Defaults())
