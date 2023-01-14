@@ -4,44 +4,30 @@ import (
 	"fmt"
 
 	"github.com/adlio/trello"
-	"github.com/caarlos0/env/v6"
-	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
+	"gorm.io/gorm"
 
+	"github.com/City-Dream/backend/config"
 	"github.com/City-Dream/backend/model"
 	"github.com/City-Dream/backend/model/mapping"
 	"github.com/City-Dream/backend/repository"
 )
 
-type Config struct {
-	AppKey  string `env:"TRELLO_APP_KEY,required"`
-	Token   string `env:"TRELLO_TOKEN,required"`
-	BoardId string `env:"TRELLO_BOARD_ID,required"`
-}
-
-var dRepo = repository.Dream{}
-var uRepo = repository.User{}
+var (
+	err error
+	db *gorm.DB
+	cfg = config.FromEnv()
+)
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		panic("Error loading .env file: " + err.Error())
-	}
-	cfg := &Config{}
-	if err := env.Parse(cfg); err != nil {
-		panic(err)
-	}
+	db = repository.MustGetConn()
 
 	client := trello.NewClient(cfg.AppKey, cfg.Token)
 	board, err := client.GetBoard(cfg.BoardId, trello.Defaults())
-	if err != nil {
-		panic(err)
-	}
+	checkErr(err)
 	// GetLists makes an API call to /boards/:id/lists using credentials from `client`
 	lists, err := board.GetLists(trello.Defaults())
-	if err != nil {
-		panic(err)
-	}
+	checkErr(err)
 
 	for _, list := range lists {
 		// GetCards makes an API call to /lists/:id/cards using credentials from `client`
@@ -64,28 +50,34 @@ func main() {
 			}
 
 			dream := mapping.Dream(list, card, firstAdmin, att[0]) // map dream from trello card
-			err = dRepo.CreateDream(&dream)
+			err = db.Save(dream).Error
 			checkErr(err)
 
 			clIds := card.Checklists
 			for _, clId := range clIds {
 				cl, err := client.GetChecklist(clId.ID, trello.Defaults())
-				if err != nil {
-					panic(err)
-				}
-				_ = cl
+				checkErr(err)
+
+				stage := mapping.DreamStage(cl)
+				checkErr(db.Save(stage).Error)
+
+				resources := mapping.Resources(cl)
+				checkErr(db.Save(resources).Error)
 			}
 		}
 	}
 }
 
-func getUser(m *trello.Member) model.User {
-	u := uRepo.FindByTrelloId(m.Username)
-	if u == nil {
-		return mapping.User(m)
+func getUser(m *trello.Member) (u *model.User) {
+	err = db.Where(map[string]interface{}{"trello_id": m.Username}).First(&u).Error
+	if err != nil {
+		u = mapping.User(m)
+		checkErr(db.Save(u).Error)
+
+		return u
 	}
 
-	return *u
+	return u
 }
 
 func checkErr(err error) {

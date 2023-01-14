@@ -4,14 +4,21 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/City-Dream/backend/model"
 	"github.com/City-Dream/backend/repository"
 )
 
 func main() {
-	var dRepo = repository.Dream{}
-	ds := dRepo.GetAll()
+	var dreams []*model.Dream
+	repository.
+		MustGetConn().
+		Joins("Owner").
+		Preload("Manager").
+		Preload("Resources").
+		Preload("Resources.DreamStage").
+		Find(&dreams)
 
-	o, err := json.Marshal(&ds)
+	o, err := json.Marshal(&dreams)
 	checkErr(err)
 	fmt.Println(string(o))
 }

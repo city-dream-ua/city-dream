@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"github.com/adlio/trello"
-	"github.com/google/uuid"
 	"github.com/lib/pq"
 
 	"github.com/City-Dream/backend/model"
@@ -14,11 +13,9 @@ import (
 
 var avatarSize = 170
 
-func User(m *trello.Member) model.User {
-	return model.User{
-		ID:        uuid.New(),
+func User(m *trello.Member) *model.User {
+	return &model.User{
 		FbID:      sql.NullString{},
-		TgID:      sql.NullString{},
 		TrelloID:  sql.NullString{String: m.Username, Valid: true},
 		FirstName: getFirstName(m),
 		LastName:  getLastName(m),

@@ -9,7 +9,10 @@ import (
 
 type Config struct {
 	//DbDSN string `env:"DB_DREAM,required" envDefault:"postgres://postgres:pass@127.0.0.1:5454/city-dream?sslmode=disable&search_path=pg_catalog,public,user_service,dream_service"`
-	DbDSN string `env:"DB_DREAM,required" envDefault:"cityDream.db"`
+	DbDSN   string `env:"DB_DREAM,required" envDefault:"cityDream.db"`
+	AppKey  string `env:"TRELLO_APP_KEY,required"`
+	Token   string `env:"TRELLO_TOKEN,required"`
+	BoardId string `env:"TRELLO_BOARD_ID,required"`
 }
 
 var (
