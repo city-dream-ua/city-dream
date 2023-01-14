@@ -5,7 +5,7 @@ const loader: ImageLoader = ({ src, width, quality }) => {
     ? `${src}?format=auto&quality=${quality}&width=${width}`
     : `${src}?format=auto&width=${width}`;
 };
-
+// TODO: rollback images with loader to next/image
 export const Image = (props: ImageProps) => {
   return <NextImage loader={loader} {...props}/>
 }

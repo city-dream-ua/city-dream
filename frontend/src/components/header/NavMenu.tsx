@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 
 import { Box } from '@mui/system';
 import { Avatar, Button, Typography } from '@mui/material';
-import { signOut, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
-import { ButtonShareDream, Image } from '..';
+import Image from 'next/image';
+
+import { ButtonShareDream } from '..';
 
 interface User {
   email: string;
@@ -79,16 +81,14 @@ export const NavMenu = () => {
               </Avatar>
             </Box>
         ): (
-          <Link href={'/auth/sign-in'}>
             <Button
-              component={'a'}
               variant={'outlined'}
               color={'inherit'}
+              onClick={() => signIn('facebook', { callbackUrl: '/' })}
               sx={{ borderColor: 'rgba(255, 255, 255, 0.5)' }}
             >
               Login with Facebook
             </Button>
-          </Link>
         )}
       </Box>
     </>
