@@ -148,5 +148,8 @@ export const theme = createTheme({
         }
       }
     },
-  }
+    MuiCssBaseline: {
+
+    }
+  },
 });

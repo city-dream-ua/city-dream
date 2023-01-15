@@ -80,9 +80,10 @@ export const Footer = () => {
               />
             </a>
             <Box>
-              <Link href={'/terms-and-use'} passHref>
+              <Link href={'/terms-and-use'}>
                 <Typography
                   pr={2}
+                  component={'span'}
                   fontSize={12}
                   color={'text.light'}
                   sx={{ textDecoration: 'none' }}
@@ -97,9 +98,10 @@ export const Footer = () => {
                   borderColor: 'rgba(255, 255, 255, 0.2)',
                 }}
               />
-              <Link href={'/privacy-policy'} passHref>
+              <Link href={'/privacy-policy'}>
                 <Typography
                   pl={2}
+                  component={'span'}
                   fontSize={12}
                   color={'text.light'}
                   display={'inline-block'}

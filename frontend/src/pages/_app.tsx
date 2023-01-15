@@ -6,6 +6,8 @@ import { theme } from '@/themes';
 import { CssBaseline } from '@mui/material';
 import { Header, Footer } from '@/components';
 
+import '@/styles/globals.css'
+
 function App({ Component, pageProps: { session, ...pageProps} }: AppProps) {
   return (
     <SessionProvider session={session}>
