@@ -1,10 +1,13 @@
 package migration
 
 import (
-	"github.com/City-Dream/backend/config"
-	"github.com/City-Dream/backend/model"
+	"fmt"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+
+	"github.com/City-Dream/backend/config"
+	"github.com/City-Dream/backend/model"
 )
 
 func Do() error {
@@ -12,7 +15,7 @@ func Do() error {
 	dial := sqlite.Open(cfg.DbDSN)
 	db, err := gorm.Open(dial, &gorm.Config{})
 	if err != nil {
-		return err
+		return fmt.Errorf("unable to migrate %s. Err: %s", cfg.DbDSN, err.Error())
 	}
 
 	return db.AutoMigrate(
