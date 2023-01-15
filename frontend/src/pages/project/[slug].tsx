@@ -6,6 +6,7 @@ import { FC } from 'react';
 import { ProjectCardProps } from '@/components';
 import { GetStaticProps } from 'next';
 import { projectsContext } from '@/context';
+import { Layout } from '@/components/layout';
 
 type ProjectPageProps = {
   project: ProjectCardProps;
@@ -21,9 +22,11 @@ const ProjectPage: FC<ProjectPageProps> = ({ projects, project }) => {
         <meta name="description" content="Project name"/>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
-      <projectsContext.Provider value={{ projects, project }}>
-        <Project/>
-      </projectsContext.Provider>
+      <Layout>
+        <projectsContext.Provider value={{ projects, project }}>
+          <Project/>
+        </projectsContext.Provider>
+      </Layout>
     </>
   );
 };

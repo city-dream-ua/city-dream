@@ -18,7 +18,7 @@ interface User {
 export const NavMenu = () => {
   const sessionData  = useSession();
   const [user, setUser] = useState<User | null>(null)
-  console.log(sessionData?.data);
+
   useEffect(() => {
     if (sessionData?.data) {
       setUser(sessionData?.data?.user as User)
