@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"os/exec"
 
 	"github.com/gin-gonic/gin"
 
@@ -12,7 +13,19 @@ import (
 )
 
 func ExportStaticApi(c *gin.Context) {
-	err := migration.Do()
+	// ---=== DEBUG ===--- //
+	cmd := exec.Command("ls", "-la", "/mnt/data")
+	stdout, err := cmd.Output()
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	fmt.Println(string(stdout))
+	// ---=== DEBUG ===--- //
+
+	err = migration.Do()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("migration error: %s", err)})
 		return
