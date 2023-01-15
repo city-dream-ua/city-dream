@@ -2,22 +2,27 @@ name: deploy lambda
 on: [push]
 jobs:
   build-and-deploy:
-    using: 'docker'
-    image: 'Dockerfile'
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Build lambda
-        run: |
-          cd go/src
-          bash api/lambda/build.sh
+      - name: Build docker images
+        run: docker build -t local < ./Dockerfile
 
-      - name: Deploy lambda
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          cd go/src
-          bash api/lambda/deploy.sh
+      - name: Run tests
+        run: docker run -it -v $PWD:/srv -w/srv bash go/src/api/lambda/build.sh
+
+#      - name: Build lambda
+#        run: |
+#          cd go/src
+#          bash api/lambda/build.sh
+#
+#      - name: Deploy lambda
+#        env:
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#        run: |
+#          cd go/src
+#          bash api/lambda/deploy.sh
