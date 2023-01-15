@@ -3,3 +3,4 @@
 FROM amazonlinux:2.0.20210701.0
 
 RUN yum install golang -y
+RUN yum install ca-certificates libgnutls30 -y
