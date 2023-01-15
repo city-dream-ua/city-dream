@@ -9,7 +9,7 @@ jobs:
           fetch-depth: 0
 
       - name: Build docker images
-        run: docker build -t local < ./Dockerfile
+        run: docker build -t local < ./.github/workflows/Dockerfile
 
       - name: Run tests
         run: docker run -it -v $PWD:/srv -w/srv bash go/src/api/lambda/build.sh
