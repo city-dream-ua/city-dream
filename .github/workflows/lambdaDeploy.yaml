@@ -12,7 +12,7 @@ jobs:
         run: docker build -t local - < ./.github/workflows/Dockerfile
 
       - name: Run tests
-        run: docker run -v $PWD:/srv -w/srv ./local bash /srv/go/src/api/lambda/build.sh
+        run: docker run -v $PWD:/srv -w/srv local bash /srv/go/src/api/lambda/build.sh
 
 #      - name: Build lambda
 #        run: |
