@@ -10,7 +10,10 @@
 
 # next.js
 /.next/
+/.next-tf/
 /out/
+/.serverless
+/.serverless_nextjs
 
 # production
 /build
@@ -33,4 +36,5 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+
+.env
