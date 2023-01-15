@@ -2,10 +2,8 @@ package handler
 
 import (
 	"fmt"
-	"net/http"
-	"os/exec"
-
 	"github.com/gin-gonic/gin"
+	"net/http"
 
 	"github.com/City-Dream/backend/api/export"
 	"github.com/City-Dream/backend/model/migration"
@@ -13,32 +11,7 @@ import (
 )
 
 func ExportStaticApi(c *gin.Context) {
-	// ---=== DEBUG ===--- //
-
-	cmd := exec.Command("touch", "/mnt/data/cityDream.db")
-	stdout, err := cmd.Output()
-
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
-
-	fmt.Println(string(stdout))
-
-	// --== second command ==-- //
-
-	cmd = exec.Command("ls", "-la", "/mnt/data")
-	stdout, err = cmd.Output()
-
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
-
-	fmt.Println(string(stdout))
-	// ---=== DEBUG ===--- //
-
-	err = migration.Do()
+	err := migration.Do()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("migration error: %s", err)})
 		return
