@@ -1,10 +1,12 @@
 import { FC } from 'react';
 
+import Image from 'next/image';
 import { Box } from '@mui/system';
 import { Container, Grid, Typography } from '@mui/material';
 
 import heroImage from '@/assets/images/cd-hero-image.png';
-import { Image, ButtonShareDream } from '..';
+import { ButtonShareDream } from '..';
+
 
 type HomeHeroProps = {
   moreMd: boolean;
@@ -20,7 +22,7 @@ export const Hero: FC<HomeHeroProps> = ({ moreMd, lessLg }) => {
     <Box bgcolor={'background.paper'} component={'section'}>
       <Container>
         <Box pt={'90px'} pb={'64px'}>
-          <Grid container columnSpacing={4}>
+          <Grid container columnSpacing={4} >
             <Grid item md={6}>
               <Box maxWidth={descriptionMaxWidth} mb={moreMd ? 0 : 8}>
                 <Box mb={3}>
@@ -74,7 +76,7 @@ export const Hero: FC<HomeHeroProps> = ({ moreMd, lessLg }) => {
                 )}
                 <Image
                   src={heroImage}
-                  objectFit={'cover'}
+                  style={{ width: '100%', height: 'auto' }}
                   title={'Разом до втілення ідей'}
                   alt={'Команда складає руки перед девізом'}
                 />

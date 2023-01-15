@@ -15,15 +15,13 @@ export const Logo = () => (
       alignItems={'center'}
       left={'calc(50% - 100px)'}
     >
-      <Link href={'/'}>
-        <a style={{ display: 'block', lineHeight: 0 }}>
-          <Image
-            width={200}
-            height={26}
-            src={logo}
-            alt={'City dream logo'}
-          />
-        </a>
+      <Link href={'/'} style={{ display: 'block', lineHeight: 0 }}>
+        <Image
+          width={200}
+          height={26}
+          src={logo}
+          alt={'City dream logo'}
+        />
       </Link>
     </Box>
   </>

@@ -15,7 +15,7 @@ export type FlowStepProps = {
 export const FlowStep: FC<FlowStepProps> = ({ children, ...imageProps }) => (
   <Box textAlign={'center'}>
     <Box mx={'auto'} mb={3}>
-      <Image width={140} height={146} objectFit={'cover'} {...imageProps} />
+      <Image width={140} height={146} style={{ objectFit: 'cover' }} {...imageProps} />
     </Box>
     <Box mx={'auto'} maxWidth={240}>
       {children}

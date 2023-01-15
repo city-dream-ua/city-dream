@@ -40,7 +40,7 @@ export const Footer = () => {
             <Image
               width={288}
               height={100}
-              objectFit={'cover'}
+              style={{ objectFit: 'cover' }}
               src={logoFounders}
               alt={'Logo European union'}
             />
@@ -84,7 +84,6 @@ export const Footer = () => {
                 <Typography
                   pr={2}
                   fontSize={12}
-                  component={'a'}
                   color={'text.light'}
                   sx={{ textDecoration: 'none' }}
                 >
@@ -102,7 +101,6 @@ export const Footer = () => {
                 <Typography
                   pl={2}
                   fontSize={12}
-                  component={'a'}
                   color={'text.light'}
                   display={'inline-block'}
                   sx={{ textDecoration: 'none' }}

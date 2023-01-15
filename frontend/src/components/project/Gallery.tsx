@@ -24,7 +24,7 @@ const ImageContainer: FC<ImageContainerProps> = (
   }}
   >
     <Image
-      objectFit={'cover'}
+      style={{ objectFit: 'cover' }}
       src={src}
       alt={alt}
     />
@@ -59,7 +59,7 @@ export const Gallery: FC<{ lessLg: boolean }> = ({ lessLg }) => {
     }}
     >
       <Image
-        objectFit={'cover'}
+        style={{ objectFit: 'cover', objectPosition: 'center' }}
         src={src}
         width={640}
         height={500}

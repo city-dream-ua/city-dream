@@ -61,7 +61,15 @@ export const ProjectCard: FC<ProjectCardProps> = (
           }
         }}
         >
-          <Image objectFit={'cover'} width={300} height={200} src={src} alt={alt}/>
+          <Box sx={{ '& > img': { width: '100%' } }}>
+            <Image
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              width={300}
+              height={200}
+              src={src}
+              alt={alt}
+            />
+          </Box>
         </CardMedia>
         <CardContent>
           <Box>

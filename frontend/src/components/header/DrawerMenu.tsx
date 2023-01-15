@@ -12,7 +12,6 @@ export const DrawerMenu = () => {
       <Stack spacing={4} height={'100%'}>
         <Link href={'/#pro-nas'}>
           <Typography
-            component={'a'}
             color={'text.light'}
             sx={{ cursor: 'pointer' }}
           >
@@ -21,7 +20,6 @@ export const DrawerMenu = () => {
         </Link>
         <Link href={'/#pro-nas'}>
           <Typography
-            component={'a'}
             color={'text.light'}
             sx={{ cursor: 'pointer' }}
           >

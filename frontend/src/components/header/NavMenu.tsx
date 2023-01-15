@@ -31,9 +31,8 @@ export const NavMenu = () => {
     <>
       <Box display={'flex'} alignItems={'center'} flexGrow={1}>
         <Box>
-          <Link href={'/#pro-nas'} passHref>
+          <Link href={'/#pro-nas'}>
             <Typography
-              component={'a'}
               color={'text.light'}
               sx={{ textDecoration: 'none' }}
             >
@@ -44,7 +43,6 @@ export const NavMenu = () => {
         <Box marginX={3}>
           <Link href={'/#projects-in-progress'} passHref>
             <Typography
-              component={'a'}
               color={'text.light'}
               sx={{ textDecoration: 'none' }}
             >
