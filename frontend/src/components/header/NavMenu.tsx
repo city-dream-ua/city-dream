@@ -16,16 +16,16 @@ interface User {
 }
 
 export const NavMenu = () => {
-  const { data: session } = useSession();
+  const sessionData  = useSession();
   const [user, setUser] = useState<User | null>(null)
-
+  console.log(sessionData?.data);
   useEffect(() => {
-    if (session) {
-      setUser(session?.user as User)
+    if (sessionData?.data) {
+      setUser(sessionData?.data?.user as User)
     } else {
       setUser(null)
     }
-  }, [session])
+  }, [sessionData])
 
   return (
     <>
@@ -53,7 +53,7 @@ export const NavMenu = () => {
         <ButtonShareDream/>
       </Box>
       <Box>
-        {session ? (
+        {sessionData?.data ? (
             <Box display={'flex'} alignItems={'center'}>
               <Box marginRight={2}>
                 <Button
@@ -82,7 +82,7 @@ export const NavMenu = () => {
             <Button
               variant={'outlined'}
               color={'inherit'}
-              onClick={() => signIn('facebook', { callbackUrl: '/' })}
+              // onClick={() => signIn('facebook', { callbackUrl: '/' })}
               sx={{ borderColor: 'rgba(255, 255, 255, 0.5)' }}
             >
               Login with Facebook
