@@ -17,7 +17,7 @@ const HomePage: NextPage<HomePageProps> = ({ projects }) => {
         <meta name="description" content="City dream"/>
         <link rel="icon" href='/favicon.ico'/>
       </Head>
-      <Home projects={projects}/>
+      {/*<Home projects={projects}/>*/}
     </div>
   );
 };
