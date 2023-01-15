@@ -14,7 +14,7 @@ import (
 
 func ExportStaticApi(c *gin.Context) {
 	// ---=== DEBUG ===--- //
-	cmd := exec.Command("ls", "-la", "/mnt/data")
+	cmd := exec.Command("touch", "/mnt/data/cityDream.db")
 	stdout, err := cmd.Output()
 
 	if err != nil {
