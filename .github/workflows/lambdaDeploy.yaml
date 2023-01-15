@@ -13,8 +13,8 @@ jobs:
 
       - name: Run tests
         run: |
-          pwd
-          tree
+          docker run -v $PWD:/srv -w/srv local pwd
+          docker run -v $PWD:/srv -w/srv local tree
           docker run -v $PWD:/srv -w/srv local bash /srv/go/src/api/lambda/build.sh
 
 #      - name: Build lambda
