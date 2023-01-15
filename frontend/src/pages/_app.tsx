@@ -4,18 +4,18 @@ import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from '@mui/system';
 import { theme } from '@/themes';
 import { CssBaseline } from '@mui/material';
-import { Header, Footer } from '@/components';
 
 import '@/styles/globals.css'
+import { Layout } from '@/components/layout';
 
 function App({ Component, pageProps: { session, ...pageProps} }: AppProps) {
   return (
     <SessionProvider session={session}>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
-        <Header/>
-        <Component {...pageProps} />
-        {/*<Footer/>*/}
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </SessionProvider>
   );
