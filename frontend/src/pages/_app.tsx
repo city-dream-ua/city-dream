@@ -15,7 +15,7 @@ function App({ Component, pageProps: { session, ...pageProps} }: AppProps) {
         <CssBaseline/>
         {/*<Header/>*/}
         <Component {...pageProps} />
-        <Footer/>
+        {/*<Footer/>*/}
       </ThemeProvider>
     </SessionProvider>
   );
