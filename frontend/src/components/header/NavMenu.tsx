@@ -82,7 +82,7 @@ export const NavMenu = () => {
             <Button
               variant={'outlined'}
               color={'inherit'}
-              // onClick={() => signIn('facebook', { callbackUrl: '/' })}
+              onClick={() => signIn('facebook', { callbackUrl: '/' })}
               sx={{ borderColor: 'rgba(255, 255, 255, 0.5)' }}
             >
               Login with Facebook
