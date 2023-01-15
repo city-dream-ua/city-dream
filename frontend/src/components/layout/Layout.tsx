@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from 'react';
 import { Footer, Header } from '@/components';
 
-const LayoutWrapper = ({ children }: { children: ReactNode }) => (
+export const Layout = ({ children }: { children: ReactNode }) => (
   <>
     <Header/>
     {children}
@@ -9,8 +9,8 @@ const LayoutWrapper = ({ children }: { children: ReactNode }) => (
   </>
 );
 
-export const Layout = (page: ReactElement) => (
-  <LayoutWrapper>
-    {page}
-  </LayoutWrapper>
-)
+// export const Layout = (page: ReactElement) => (
+//   <LayoutWrapper>
+//     {page}
+//   </LayoutWrapper>
+// )

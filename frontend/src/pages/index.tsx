@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 import { Home, ProjectCardProps } from '@/components';
 import { getProjects } from '@/api-utils';
+import { Layout } from '@/components/layout';
 
 type HomePageProps = {
   projects: ProjectCardProps[];
@@ -17,7 +18,9 @@ function HomePage({ projects }: HomePageProps) {
         <meta name="description" content="City dream"/>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
-      <Home projects={projects}/>
+      <Layout>
+        <Home projects={projects}/>
+      </Layout>
     </div>
   );
 };
