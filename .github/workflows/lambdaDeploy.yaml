@@ -18,11 +18,11 @@ jobs:
 #        run: |
 #          cd go/src
 #          bash api/lambda/build.sh
-#
-#      - name: Deploy lambda
-#        env:
-#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#        run: |
-#          cd go/src
-#          bash api/lambda/deploy.sh
+
+      - name: Deploy lambda
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          cd go/src
+          bash api/lambda/deploy.sh
