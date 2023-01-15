@@ -21,38 +21,38 @@ const ProjectPage: FC<ProjectPageProps> = ({ projects, project }) => {
         <meta name="description" content="Project name"/>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
-      {/*<projectsContext.Provider value={{ projects, project }}>*/}
-      {/*  <Project/>*/}
-      {/*</projectsContext.Provider>*/}
+      <projectsContext.Provider value={{ projects, project }}>
+        <Project/>
+      </projectsContext.Provider>
     </>
   );
 };
-//
-// export const getStaticPaths = async () => {
-//   const projects = await getProjects();
-//   const paths = projects?.map(({ slug }) => ({
-//     params: { slug },
-//   })) || [];
-//
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
-//
-// export const getStaticProps: GetStaticProps = async (context) => {
-//   const slug = context.params?.slug as string | undefined;
-//
-//   // TODO: cache projects after first request
-//   const projects = await getProjects();
-//   const project = slug ? await getProject(slug) : null;
-//
-//   return {
-//     props: {
-//       project,
-//       projects,
-//     },
-//   };
-// };
+
+export const getStaticPaths = async () => {
+  const projects = await getProjects();
+  const paths = projects?.map(({ slug }) => ({
+    params: { slug },
+  })) || [];
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const slug = context.params?.slug as string | undefined;
+
+  // TODO: cache projects after first request
+  const projects = await getProjects();
+  const project = slug ? await getProject(slug) : null;
+
+  return {
+    props: {
+      project,
+      projects,
+    },
+  };
+};
 
 export default ProjectPage;

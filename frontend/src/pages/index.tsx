@@ -8,14 +8,14 @@ type HomePageProps = {
   projects: ProjectCardProps[];
 }
 
-const HomePage: NextPage<HomePageProps> = ({ projects }) => {
+function HomePage({ projects }: HomePageProps) {
 
   return (
     <div>
       <Head>
         <title>City dream</title>
         <meta name="description" content="City dream"/>
-        <link rel="icon" href='/favicon.ico'/>
+        <link rel="icon" href="/favicon.ico"/>
       </Head>
       <Home projects={projects}/>
     </div>

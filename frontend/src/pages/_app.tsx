@@ -6,16 +6,13 @@ import { theme } from '@/themes';
 import { CssBaseline } from '@mui/material';
 
 import '@/styles/globals.css'
-import { Layout } from '@/components/layout';
 
 function App({ Component, pageProps: { session, ...pageProps} }: AppProps) {
   return (
     <SessionProvider session={session}>
       <ThemeProvider theme={theme}>
         <CssBaseline/>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Component {...pageProps} />
       </ThemeProvider>
     </SessionProvider>
   );
