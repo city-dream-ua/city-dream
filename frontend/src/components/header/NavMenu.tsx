@@ -16,16 +16,18 @@ interface User {
 }
 
 export const NavMenu = () => {
-  const sessionData  = useSession();
-  const [user, setUser] = useState<User | null>(null)
+  const sessionData = useSession();
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     if (sessionData?.data) {
-      setUser(sessionData?.data?.user as User)
+      setUser(sessionData.data?.user as User);
+
+      console.log(sessionData.data?.token);
     } else {
-      setUser(null)
+      setUser(null);
     }
-  }, [sessionData])
+  }, [sessionData]);
 
   return (
     <>
@@ -54,41 +56,41 @@ export const NavMenu = () => {
       </Box>
       <Box>
         {sessionData?.data ? (
-            <Box display={'flex'} alignItems={'center'}>
-              <Box marginRight={2}>
-                <Button
-                  variant={'outlined'}
-                  color={'inherit'}
-                  onClick={() => signOut()}
-                  sx={{ borderColor: 'rgba(255, 255, 255, 0.5)' }}
-                >
-                  Logout
-                </Button>
-              </Box>
-              <Avatar title={user?.name}>
-                {user?.image
-                  ? (
-                    <Image
-                      src={user?.image}
-                      width={40}
-                      height={40}
-                      alt={'User avatar icon'}
-                    />
-                  )
-                  : user?.name.split((' ')).map(str => str[0].toUpperCase())}
-              </Avatar>
+          <Box display={'flex'} alignItems={'center'}>
+            <Box marginRight={2}>
+              <Button
+                variant={'outlined'}
+                color={'inherit'}
+                onClick={() => signOut()}
+                sx={{ borderColor: 'rgba(255, 255, 255, 0.5)' }}
+              >
+                Logout
+              </Button>
             </Box>
-        ): (
-            <Button
-              variant={'outlined'}
-              color={'inherit'}
-              onClick={() => signIn('facebook', { callbackUrl: '/' })}
-              sx={{ borderColor: 'rgba(255, 255, 255, 0.5)' }}
-            >
-              Login with Facebook
-            </Button>
+            <Avatar title={user?.name}>
+              {user?.image
+                ? (
+                  <Image
+                    src={user?.image}
+                    width={40}
+                    height={40}
+                    alt={'User avatar icon'}
+                  />
+                )
+                : user?.name?.split((' ')).map(str => str[0].toUpperCase())}
+            </Avatar>
+          </Box>
+        ) : (
+          <Button
+            variant={'outlined'}
+            color={'inherit'}
+            onClick={() => signIn('facebook', { callbackUrl: '/' })}
+            sx={{ borderColor: 'rgba(255, 255, 255, 0.5)' }}
+          >
+            Login with Facebook
+          </Button>
         )}
       </Box>
     </>
   );
-}
+};

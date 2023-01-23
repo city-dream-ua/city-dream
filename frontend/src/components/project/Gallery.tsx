@@ -51,18 +51,11 @@ export const Gallery: FC<{ lessLg: boolean }> = ({ lessLg }) => {
     //     </Stack>
     //   </Grid>
     //   <Grid item xs={9}>
-    <Box width={'100%'} height={'100%'} sx={{
-      '& > span': {
-        height: '100% !important',
-        width: '100% !important'
-      }
-    }}
-    >
+    <Box   position={'relative'} width={'100%'} height={500}>
       <Image
+        fill
         style={{ objectFit: 'cover', objectPosition: 'center' }}
         src={src}
-        width={640}
-        height={500}
         alt={'Project image'}
       />
     </Box>
