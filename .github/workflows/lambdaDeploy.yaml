@@ -11,18 +11,16 @@ jobs:
       - name: Build docker images
         run: docker build -t local - < ./.github/workflows/Dockerfile
 
-      - name: Build lambda
-        run: docker run -v $PWD:/srv -w/srv local bash -c "cd /srv/go/src && bash api/lambda/build.sh"
+      - name: Build app
+        run: docker run -v $PWD:/srv -w/srv local bash -c "cd /srv/go/src && bash api/local/build.sh"
 
-#      - name: Build lambda
-#        run: |
-#          cd go/src
-#          bash api/lambda/build.sh
-
-      - name: Deploy lambda
+      - name: Deploy app
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SERVER_KEY: ${{ secrets.AWS_SERVER_KEY }}
+          AWS_SERVER_IP: ${{ secrets.AWS_SERVER_IP }}
+          AWS_SERVER_USER: ${{ secrets.AWS_SERVER_USER }}
         run: |
           cd go/src
-          bash api/lambda/deploy.sh
+          echo $AWS_SERVER_KEY > key.pem
+          scp -i "./key.pem" ./deployment.zip ${AWS_SERVER_USER}@${AWS_SERVER_IP}:~
+          ssh -i "./key.pem" ${AWS_SERVER_USER}@${AWS_SERVER_IP} "unzip deployment.zip"
