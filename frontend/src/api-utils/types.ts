@@ -14,6 +14,20 @@ interface TrelloPerson {
   Roles: string[];
 }
 
+interface Resource {
+  ID: string;
+  Title: string
+  DreamID: string;
+  Dream: null;
+  DreamStageID: string;
+  DreamStage: {
+    ID: string;
+    Name: string;
+    DreamID: string;
+  },
+  Status: 'complete' | 'incomplete'
+}
+
 export type TrelloProjectCardProps = {
   ID: string;
   TrelloID: string;
@@ -26,4 +40,5 @@ export type TrelloProjectCardProps = {
   Manager: TrelloPerson;
   Status: string;
   ShortLink: string;
+  Resources: Resource[];
 }

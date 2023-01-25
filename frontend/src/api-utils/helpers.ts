@@ -20,6 +20,7 @@ const normalizeTrelloData = (
         String: avatar,
       }
     },
+    Resources,
   }: TrelloProjectCardProps):ProjectCardProps => ({
   id: ID,
   title: Title,
@@ -30,6 +31,16 @@ const normalizeTrelloData = (
   authorLastName: lastName,
   description: Description,
   slug: ShortLink,
+  resources: Resources.map(resource => ({
+    id: resource?.ID,
+    title: resource?.Title,
+    status: resource?.Status,
+    step: {
+      id: resource?.DreamStage?.ID,
+      dreamId: resource?.DreamStage?.DreamID,
+      name: resource?.DreamStage?.Name,
+    }
+  }))
 })
 
 const CORE_API = 'https://api.citydream.pp.ua/api'

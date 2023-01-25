@@ -12,6 +12,17 @@ import {
   Typography
 } from '@mui/material';
 
+type ResourcesProps = {
+  id: string;
+  title: string;
+  status: 'incomplete' | 'complete';
+  step: {
+    id: string;
+    name: string;
+    dreamId: string;
+  }
+}
+
 export type ProjectCardProps = {
   id: string;
   src: string | StaticImageData;
@@ -22,6 +33,7 @@ export type ProjectCardProps = {
   authorLastName: string;
   description: string;
   slug: string;
+  resources: ResourcesProps[];
 }
 
 export const ProjectCard: FC<ProjectCardProps> = (
