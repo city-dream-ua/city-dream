@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { ProjectCardProps } from '@/components';
+import { ProjectCardProps } from '@/types/projectCard';
 
 export const projectsContext = createContext<{
   project: ProjectCardProps;
@@ -15,6 +15,7 @@ export const projectsContext = createContext<{
     authorLastName: '',
     description: '',
     slug: '',
+    steps: [],
   },
   projects: null,
 });

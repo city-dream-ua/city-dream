@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { StaticImageData } from 'next/image';
 import Link from 'next/link';
 
 import { Image } from '../atom';
@@ -11,30 +10,7 @@ import {
   CardMedia,
   Typography
 } from '@mui/material';
-
-type ResourcesProps = {
-  id: string;
-  title: string;
-  status: 'incomplete' | 'complete';
-  step: {
-    id: string;
-    name: string;
-    dreamId: string;
-  }
-}
-
-export type ProjectCardProps = {
-  id: string;
-  src: string | StaticImageData;
-  alt: string;
-  title: string;
-  authorAvatar: string;
-  authorFirstName: string;
-  authorLastName: string;
-  description: string;
-  slug: string;
-  resources: ResourcesProps[];
-}
+import { ProjectCardProps } from '@/types/projectCard';
 
 export const ProjectCard: FC<ProjectCardProps> = (
   {

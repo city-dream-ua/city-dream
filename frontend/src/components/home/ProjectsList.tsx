@@ -2,7 +2,9 @@ import { FC } from 'react';
 
 import { Grid } from '@mui/material';
 
-import { ProjectCard, ProjectCardProps } from '.';
+import { ProjectCardProps } from '@/types/projectCard';
+
+import { ProjectCard } from '.';
 
 type ProjectsListProps = {
   projects: ProjectCardProps[];

@@ -11,7 +11,8 @@ export const Description = () => {
     description,
     authorAvatar,
     authorLastName,
-    authorFirstName
+    authorFirstName,
+    steps,
   } } = useProjectsProvider();
 
   return (
@@ -39,15 +40,19 @@ export const Description = () => {
         </Typography>
       </Box>
       <Box my={3} overflow={'hidden'}>
-        <Typography color={'text.secondary'} fontWeight={'fontWeightLight'}>
-          {description}
-        </Typography>
+        <Typography color={'text.secondary'} fontWeight={'fontWeightLight'} dangerouslySetInnerHTML={{ __html: description }}/>
       </Box>
-      <Stack spacing={2}>
-        <StepProgress step={'1 Етап'} progress={100}/>
-        <StepProgress step={'2 Етап'} progress={70}/>
-        <StepProgress step={'3 Етап'} progress={0}/>
-      </Stack>
+      {!!steps.length && (
+        <Stack spacing={2}>
+          {steps.map(({ name, resources }, index) => (
+            <StepProgress key={index} step={name} progress={
+              (resources.filter(resource => {
+                return resource.status !== 'incomplete';
+              }).length / resources.length) * 100
+            }/>
+          ))}
+        </Stack>
+      )}
     </Box>
   );
 };

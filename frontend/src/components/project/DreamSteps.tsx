@@ -1,26 +1,32 @@
 import { Box } from '@mui/system';
-import { Button, Grid, Stack, Typography } from '@mui/material';
-import { Checkbox, CheckboxProps } from '@/components';
+import { Grid, Stack, Typography } from '@mui/material';
+import { Checkbox } from '@/components';
 import { FC } from 'react';
-import { dreamStepsMock } from '@/mocks/dream-steps-mock';
+import { StepProps } from '@/types/projectCard';
 
-export const DreamSteps = () => {
+
+
+export const DreamSteps: FC<{ steps: StepProps[] }> = ({ steps }) => {
 
   return (
     <Box>
-      <Stack direction={'row'} spacing={2}>
-        <Button variant={'contained'}>
-          Етапи мрії
-        </Button>
-        <Button variant={'contained'} color={'info'}>
-          Учасники
-        </Button>
-        <Button variant={'text'} color={'inherit'}>
-          Коментарі та пропозмції
-        </Button>
+      <Stack direction={'row'} spacing={2} mb={3}>
+        {/* TODO [API]: roll back switch button after contributors and comments */}
+        <Typography variant={'h3'}>Етапи мрії</Typography>
+        {/*<Button variant={'contained'}>*/}
+        {/*  Етапи мрії*/}
+        {/*</Button>*/}
+        {/* TODO [API]: add contributors */}
+        {/*<Button variant={'contained'} color={'info'}>*/}
+        {/*  Учасники*/}
+        {/*</Button>*/}
+        {/* TODO [API]: add comments */}
+        {/*<Button variant={'text'} color={'inherit'}>*/}
+        {/*  Коментарі та пропозмції*/}
+        {/*</Button>*/}
       </Stack>
-      <Grid container columnSpacing={2} rowSpacing={5} mt={3}>
-        {dreamStepsMock.map((step, index) => (
+      <Grid container columnSpacing={2} rowSpacing={5}>
+        {steps.map((step, index) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
             <DreamStep {...step}/>
           </Grid>
@@ -30,21 +36,15 @@ export const DreamSteps = () => {
   );
 };
 
-export type DreamStepProps = {
-  step: string;
-  isActive: boolean;
-  options: CheckboxProps[];
-};
-
-const DreamStep: FC<DreamStepProps> = ({ step, options }) => (
+const DreamStep: FC<StepProps> = ({ name, resources }) => (
   <Box>
-    <Typography variant={'h4'} component={'h4'}>{step}</Typography>
+    <Typography variant={'h4'} component={'h4'}>{name}</Typography>
     <Stack spacing={2} mt={2}>
-      {options.map(({ checkboxProps, labelProps }, index) => (
+      {resources.map(({ status, title }, index) => (
         <Box key={index}>
           <Checkbox
-            labelProps={labelProps}
-            checkboxProps={{ ...checkboxProps, color: 'primary' }}
+            labelProps={{ label: title }}
+            checkboxProps={{ checked: status !== 'incomplete' , color: 'primary' }}
           />
         </Box>
       ))}

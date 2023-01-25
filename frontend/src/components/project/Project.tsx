@@ -17,7 +17,7 @@ export const Project = () => {
               <Gallery lessLg={isLessLg}/>
             </Grid>
             <Grid item xs={12} md={5}>
-             <Description/>
+              <Description/>
               <Box mt={'58px'}>
                 <Button variant={'contained'} size={'large'}>
                   Підтримати мрію
@@ -27,9 +27,8 @@ export const Project = () => {
           </Grid>
         </Box>
         <Box>
-          <DreamSteps/>
+          {!!project.steps.length && <DreamSteps steps={project.steps}/>}
         </Box>
-
 
         {projects && (
           <Box component={'section'} mt={'84px'}>
