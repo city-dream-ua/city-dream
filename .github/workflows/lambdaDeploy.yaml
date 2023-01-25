@@ -20,5 +20,5 @@ jobs:
         run: |
           cd go/src
           echo $AWS_SERVER_KEY > key.pem
-          scp -i "./key.pem" ./deployment.zip ${AWS_SERVER_USER}@${AWS_SERVER_IP}:~
-          ssh -i "./key.pem" ${AWS_SERVER_USER}@${AWS_SERVER_IP} "unzip deployment.zip"
+          scp -i "./key.pem" ./deployment.zip ${{ env.AWS_SERVER_USER }}@${{ env.AWS_SERVER_IP }}:~
+          ssh -i "./key.pem" ${{ env.AWS_SERVER_USER }}@${{ env.AWS_SERVER_IP }} "unzip deployment.zip"
