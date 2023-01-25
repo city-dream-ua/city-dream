@@ -17,8 +17,6 @@ jobs:
       - name: Deploy app
         env:
           AWS_SERVER_KEY: ${{ secrets.AWS_SERVER_KEY }}
-          AWS_SERVER_IP: ${{ secrets.AWS_SERVER_IP }}
-          AWS_SERVER_USER: ${{ secrets.AWS_SERVER_USER }}
         run: |
           cd go/src
           echo $AWS_SERVER_KEY > key.pem
