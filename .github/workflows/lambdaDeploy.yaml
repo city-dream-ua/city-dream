@@ -20,6 +20,6 @@ jobs:
           echo "${{ secrets.AWS_SERVER_KEY }}" > key.pem
           chmod 600 ./key.pem
           scp -i "./key.pem"  -o StrictHostKeyChecking=no ./deployment.zip ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }}:~
-          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "unzip deployment.zip"
+          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "unzip -o deployment.zip"
           ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "fuser -k 8980/tcp || true"
           ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "./main > /var/log/citydream-api 2>&1 &"
