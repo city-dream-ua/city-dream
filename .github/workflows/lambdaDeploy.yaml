@@ -17,7 +17,7 @@ jobs:
       - name: Deploy app
         run: |
           cd go/src
-          echo ${{ secrets.AWS_SERVER_KEY }} > key.pem
+          echo "${{ secrets.AWS_SERVER_KEY }}" > key.pem
           chmod 600 ./key.pem
           scp -i "./key.pem"  -o StrictHostKeyChecking=no ./deployment.zip ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }}:~
           ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "unzip deployment.zip"
