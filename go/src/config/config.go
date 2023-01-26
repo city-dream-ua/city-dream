@@ -12,6 +12,7 @@ type Config struct {
 	DbDSN      string `env:"DB_DREAM,required" envDefault:"cityDream.db"`
 	AwsProfile string `env:"AWS_PROFILE,required" envDefault:"citydream"`
 	ApiBucket  string `env:"API_BUCKET,required" envDefault:"s3://eu-central-1/api.citydream.pp.ua"`
+	CfId       string `env:"CF_DISTRIBUTION_ID,required"`
 	AppKey     string `env:"TRELLO_APP_KEY,required"`
 	Token      string `env:"TRELLO_TOKEN,required"`
 	BoardId    string `env:"TRELLO_BOARD_ID,required"`
