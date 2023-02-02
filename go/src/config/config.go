@@ -16,6 +16,7 @@ type Config struct {
 	AppKey     string `env:"TRELLO_APP_KEY,required"`
 	Token      string `env:"TRELLO_TOKEN,required"`
 	BoardId    string `env:"TRELLO_BOARD_ID,required"`
+	DeployUrl  string `env:"VERCEL_DEPLOY_HOOK_URL,required"`
 }
 
 var (
