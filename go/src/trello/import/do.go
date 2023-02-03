@@ -32,9 +32,6 @@ func Do() error {
 
 	for _, list := range lists {
 		// GetCards makes an API call to /lists/:id/cards using credentials from `client`
-		if "To Do" == list.Name {
-			continue
-		}
 		args := trello.Arguments{"checklists": "all"}
 		cards, err := list.GetCards(args)
 		if err != nil {
@@ -43,6 +40,16 @@ func Do() error {
 		fmt.Printf("%#v\n", cards)
 
 		for _, card := range cards {
+			if "To Do" == list.Name {
+				d := &model.Dream{ID: card.ID}
+				err = db.First(d).Error
+				if err == nil {
+					d.Status = list.Name
+					db.Save(d)
+				}
+				continue
+			}
+
 			members, err := card.GetMembers()
 			if err != nil {
 				return err
