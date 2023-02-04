@@ -1,4 +1,4 @@
-import { Api, ERequestMethod } from '@/constants/api';
+import { Api, ERequestMethod } from '@/constants';
 import { addApiBase, setToken } from '@/api-utils/helpers';
 
 const updateDream = (token: string, data: any): Promise<Response> => {
