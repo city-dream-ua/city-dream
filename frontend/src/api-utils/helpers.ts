@@ -25,15 +25,15 @@ const normalizeTrelloData = (
   const steps: Omit<StepProps, 'resources'>[] = [];
 
   Resources.forEach(resource => {
-    const stepName = resource?.DreamStage?.Name
+    const stepName = resource?.DreamStage?.Name;
 
     if (stepName && !steps.some(({ name }) => name === stepName)) {
       steps.push({
         name: stepName,
         id: resource?.DreamStage?.Name,
-      })
+      });
     }
-  })
+  });
 
   return {
     id: ID,
@@ -50,17 +50,28 @@ const normalizeTrelloData = (
       name,
       resources: Resources.flatMap(resource => {
         return resource?.DreamStage?.Name === name
-          ? [{ id: resource?.ID, title: resource?.Title, status: resource?.Status }]
-          : []
-      })
+          ? [{
+            id: resource?.ID,
+            title: resource?.Title,
+            status: resource?.Status,
+          }]
+          : [];
+      }),
     })),
-  }
+  };
 };
 
-const CORE_API = 'https://api.citydream.pp.ua/api';
+const API_BASE = process.env.API_BASE;
+
+export const addApiBase = (url: string) => {
+  return `${API_BASE}${url}`
+}
+
+export const setToken = (token: string) => ({ Authorization: `Bearer ${token}`, })
+
 
 export const getProjects = async (token?: string): Promise<ProjectCardProps[] | null> => {
-  const res: TrelloProjectCardProps[] = await fetch(`${CORE_API}/dreams.json`, {
+  const res: TrelloProjectCardProps[] = await fetch(`${API_BASE}/dreams.json`, {
     headers: new Headers({
       Authorization: `Bearer ${token}`,
     }),
@@ -72,7 +83,7 @@ export const getProjects = async (token?: string): Promise<ProjectCardProps[] | 
 };
 
 export const getProject = async (slug: string, token?: string): Promise<ProjectCardProps | null> => {
-  const res: TrelloProjectCardProps = await fetch(`${CORE_API}/dreams/${slug}.json`, {
+  const res: TrelloProjectCardProps = await fetch(`${API_BASE}/dreams/${slug}.json`, {
     headers: new Headers({
       Authorization: `Bearer ${token}`,
     }),
@@ -82,3 +93,7 @@ export const getProject = async (slug: string, token?: string): Promise<ProjectC
 
   return res ? normalizeTrelloData(res) : null;
 };
+
+// TODO: make all request with header
+// TODO: add button that upload data from trello (only for admin)
+// TODO: api refactoring

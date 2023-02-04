@@ -5,15 +5,18 @@ import { ThemeProvider } from '@mui/system';
 import { theme } from '@/themes';
 import { CssBaseline } from '@mui/material';
 
-import '@/styles/globals.css'
+import '@/styles/globals.css';
+import { AlertProvider } from '@/providers';
 
-function App({ Component, pageProps: { session, ...pageProps} }: AppProps) {
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline/>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <AlertProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline/>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </AlertProvider>
     </SessionProvider>
   );
 }

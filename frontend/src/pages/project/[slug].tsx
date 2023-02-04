@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Project } from '@/components/project';
 import { getProject, getProjects } from '@/api-utils';
 import { FC } from 'react';
-import { ProjectCardProps } from '@/components';
+import { ProjectCardProps } from '@/types';
 import { GetStaticProps } from 'next';
 import { projectsContext } from '@/context';
 import { Layout } from '@/components/layout';

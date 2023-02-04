@@ -8,12 +8,8 @@ import {
 } from '@mui/material';
 
 import { theme } from '@/themes';
-import {
-  Hero,
-  DreamFlow,
-  ProjectsList,
-  ProjectCardProps,
-} from '@/components';
+import { ProjectCardProps } from '@/types';
+import { DreamFlow, Hero, ProjectsList } from '@/components';
 
 type HomeProps = {
   projects: ProjectCardProps[];

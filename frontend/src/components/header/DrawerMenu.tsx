@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button, Typography, Stack, Avatar } from '@mui/material';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { ButtonSyncWithTrello } from '@/components';
 
 export const DrawerMenu = () => {
   const { data: session } = useSession();
@@ -31,6 +32,7 @@ export const DrawerMenu = () => {
         >
           Поділитися мрією
         </Button>
+        <ButtonSyncWithTrello/>
 
         <Stack justifyContent={'flex-end'} flexGrow={1}>
           {session ? (

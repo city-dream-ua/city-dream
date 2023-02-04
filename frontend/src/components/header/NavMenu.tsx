@@ -1,13 +1,12 @@
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 import { Box } from '@mui/system';
 import { Avatar, Button, Typography } from '@mui/material';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
-import Image from 'next/image';
-
-import { ButtonShareDream } from '..';
+import { ButtonShareDream, ButtonSyncWithTrello } from '@/components/atom';
 
 interface User {
   email: string;
@@ -23,7 +22,6 @@ export const NavMenu = () => {
     if (sessionData?.data) {
       setUser(sessionData.data?.user as User);
 
-      console.log(sessionData.data?.token);
     } else {
       setUser(null);
     }
@@ -57,7 +55,10 @@ export const NavMenu = () => {
       <Box>
         {sessionData?.data ? (
           <Box display={'flex'} alignItems={'center'}>
-            <Box marginRight={2}>
+            <Box mr={2}>
+              <ButtonSyncWithTrello/>
+            </Box>
+            <Box mr={2}>
               <Button
                 variant={'outlined'}
                 color={'inherit'}

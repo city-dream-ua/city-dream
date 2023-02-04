@@ -4,16 +4,24 @@ import { StepProgress } from '.';
 import { Image } from '..';
 
 import { useProjectsProvider } from '@/context';
+import { useEffect, useState } from 'react';
 
 export const Description = () => {
-  const { project: {
-    title,
-    description,
-    authorAvatar,
-    authorLastName,
-    authorFirstName,
-    steps,
-  } } = useProjectsProvider();
+  const {
+    project: {
+      title,
+      description,
+      authorAvatar,
+      authorLastName,
+      authorFirstName,
+      steps,
+    },
+  } = useProjectsProvider();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, [])
 
   return (
     <Box>
@@ -40,7 +48,14 @@ export const Description = () => {
         </Typography>
       </Box>
       <Box my={3} overflow={'hidden'}>
-        <Typography color={'text.secondary'} fontWeight={'fontWeightLight'} dangerouslySetInnerHTML={{ __html: description }}/>
+
+        <Typography
+          color={'text.secondary'}
+          fontWeight={'fontWeightLight'}
+          dangerouslySetInnerHTML={{
+            __html: isClient ? description : '',
+          }}
+        />
       </Box>
       {!!steps.length && (
         <Stack spacing={2}>
