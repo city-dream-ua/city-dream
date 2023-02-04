@@ -26,7 +26,7 @@ export const ButtonSyncWithTrello: FC<ButtonProps> = ({
         } else {
           addAlert({
             status: EAlertStatus.ERROR,
-            message: res.statusText || 'Something went wrong during synchronization',
+            message: res.statusText || 'Something went wrong during the synchronization',
           });
         }
       });

@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import { Home, ProjectCardProps } from '@/components';
+import { Home } from '@/components';
 import { getProjects } from '@/api-utils';
 import { Layout } from '@/components/layout';
+import { ProjectCardProps } from '@/types';
 
 type HomePageProps = {
   projects: ProjectCardProps[];
