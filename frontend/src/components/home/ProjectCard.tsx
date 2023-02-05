@@ -8,9 +8,10 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Typography
+  Typography,
 } from '@mui/material';
 import { ProjectCardProps } from '@/types/projectCard';
+import { useHTML } from '@/hooks';
 
 export const ProjectCard: FC<ProjectCardProps> = (
   {
@@ -20,10 +21,11 @@ export const ProjectCard: FC<ProjectCardProps> = (
     title,
     authorLastName,
     authorFirstName,
-    description
-  }
+    description: descriptionProps,
+  },
 ) => {
   const [elevation, setElevation] = useState(1);
+  const description = useHTML(descriptionProps);
 
   const onMouseOver = () => {
     setElevation(5);
@@ -45,8 +47,8 @@ export const ProjectCard: FC<ProjectCardProps> = (
         <CardMedia sx={{
           '& > span': {
             width: '101% !important',
-            maxWidth: '101% !important'
-          }
+            maxWidth: '101% !important',
+          },
         }}
         >
           <Box sx={{ '& > img': { width: '100%' } }}>
@@ -70,7 +72,7 @@ export const ProjectCard: FC<ProjectCardProps> = (
               overflow={'hidden'}
               sx={{
                 WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: '2 !important'
+                WebkitLineClamp: '2 !important',
               }}
             >
               {title}
@@ -90,11 +92,10 @@ export const ProjectCard: FC<ProjectCardProps> = (
               overflow={'hidden'}
               sx={{
                 WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: '6 !important'
+                WebkitLineClamp: '5 !important',
               }}
-            >
-              {description}
-            </Typography>
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
           </Box>
         </CardContent>
       </Card>

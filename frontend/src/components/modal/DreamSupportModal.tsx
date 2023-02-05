@@ -5,81 +5,50 @@ import {
   TextField,
   Typography,
   Button,
+  useMediaQuery,
 } from '@mui/material';
 import { Box } from '@mui/system';
 
 import { Modal } from '@/components';
+import { theme } from '@/themes';
 
 type DreamSupportModalProps = Omit<ModalProps, 'children' | 'onSubmit'> & {
   dreamId: string;
   onSubmit: (value: any) => void;
 }
 
-const defaultFormState = { resources: '', email: '', phoneNumber: '' };
-
 export const DreamSupportModal: FC<DreamSupportModalProps> = ({
   onSubmit,
   dreamId,
   ...restProps
 }) => {
-  const [values, setValues] = useState<{ [name: string]: string | null }>({
-    ...defaultFormState,
-    dreamId,
-  });
+  const moreSm = useMediaQuery(theme.breakpoints.up('sm'));
+  const [contribute, setContribute] = useState<string>('');
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = ({
-    target: {
-      name,
-      value,
-    },
+    target: { value },
   }) => {
-
-    setValues(prev => ({
-      ...prev,
-      [name]: name === 'phoneNumber' ? value.replace(/\D/ig, '') : value,
-    }));
+    setContribute(value);
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    onSubmit(values);
+    onSubmit(contribute);
   };
 
   return (
     <Modal {...restProps}>
-      <Box>
+      <Box minWidth={moreSm ? 360 : 240}>
         <Typography variant={'h3'} mb={3}>Заповніть поле</Typography>
-        <Typography mb={3}>Напишіть, будь ласка, які саме ресурси ви можете
-          допомогти зібрати:</Typography>
         <Box component={'form'} onSubmit={handleSubmit}>
-          <TextField
-            onChange={handleChange}
-            value={values.email}
-            fullWidth
-            type={'email'}
-            label={'Email'}
-            variant={'outlined'}
-            name={'email'}
-            required
-          />
           <Box mb={4}/>
           <TextField
             onChange={handleChange}
-            value={values.phoneNumber}
-            fullWidth
-            type={'phone'}
-            label={'Phone number'}
-            variant={'outlined'}
-            name={'phoneNumber'}
-          />
-          <Box mb={4}/>
-          <TextField
-            onChange={handleChange}
-            value={values.resources}
+            value={contribute}
             fullWidth
             multiline
             rows={4}
-            label={'Ресурси'}
+            label={'Напишіть чим ви можете допомогти'}
             variant={'outlined'}
             name={'resources'}
             required

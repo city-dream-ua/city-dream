@@ -1,27 +1,23 @@
 import { Avatar, Box, Stack, Typography } from '@mui/material';
 
+import { useProjectsProvider } from '@/context';
+import { useHTML } from '@/hooks';
+
 import { StepProgress } from '.';
 import { Image } from '..';
-
-import { useProjectsProvider } from '@/context';
-import { useEffect, useState } from 'react';
 
 export const Description = () => {
   const {
     project: {
       title,
-      description,
+      description: descriptionProps,
       authorAvatar,
       authorLastName,
       authorFirstName,
       steps,
     },
   } = useProjectsProvider();
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, [])
+  const description = useHTML(descriptionProps);
 
   return (
     <Box>
@@ -53,7 +49,7 @@ export const Description = () => {
           color={'text.secondary'}
           fontWeight={'fontWeightLight'}
           dangerouslySetInnerHTML={{
-            __html: isClient ? description : '',
+            __html: description
           }}
         />
       </Box>

@@ -25,12 +25,12 @@ export const Project = () => {
     setIsModalOpen(false);
   };
 
-  const handleSubmit = (values: { resources: string }) => {
+  const handleSubmit = (contribution: string) => {
     // @ts-ignore
     const token = sessionData.data?.token;
 
     if (token) {
-      TrelloAPI.updateDream(token, values)
+      TrelloAPI.updateDream(token, project.id, { contribution })
         .then(async (res) => {
           if (res.ok) {
             setIsModalOpen(false);

@@ -6,8 +6,7 @@ export enum ERequestMethod {
 }
 
 class TRELLO {
-  //TODO: add correct url for updating dream
-  public static readonly UPDATE_DREAM = '';
+  public static readonly UPDATE_DREAM = '/dreams/[:id]/contribute';
   public static readonly SYNC = '/export-trello';
 }
 

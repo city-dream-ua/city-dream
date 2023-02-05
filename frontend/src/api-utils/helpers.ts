@@ -70,7 +70,6 @@ export const addApiBase = (url: string) => {
 
 export const setToken = (token: string) => ({ Authorization: `Bearer ${token}`, })
 
-
 export const getProjects = async (token?: string): Promise<ProjectCardProps[] | null> => {
   const res: TrelloProjectCardProps[] = await fetch(`${API_STATIC}/dreams.json`, {
     headers: new Headers({
