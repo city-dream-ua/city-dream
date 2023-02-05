@@ -40,7 +40,7 @@ func Do() error {
 		fmt.Printf("%#v\n", cards)
 
 		for _, card := range cards {
-			if "To Do" == list.Name {
+			if model.ToDoStatus == list.Name {
 				d := &model.Dream{ID: card.ID}
 				err = db.First(d).Error
 				if err == nil {

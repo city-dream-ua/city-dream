@@ -1,5 +1,7 @@
 package model
 
+const ToDoStatus = "To Do"
+
 type Dream struct {
 	ID          string `gorm:"primaryKey"`
 	Title       string
