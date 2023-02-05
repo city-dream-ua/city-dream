@@ -4,7 +4,6 @@ import { addApiBase, setToken } from '@/api-utils/helpers';
 const updateDream = (token: string, data: any): Promise<Response> => {
   return fetch(addApiBase(Api.trello.UPDATE_DREAM), {
     body: JSON.stringify(data),
-    mode: 'no-cors',
     method: ERequestMethod.POST,
     headers: { ...setToken(token) },
   });
@@ -12,9 +11,10 @@ const updateDream = (token: string, data: any): Promise<Response> => {
 
 const syncTrello = (token: string): Promise<Response> => {
   return fetch(addApiBase(Api.trello.SYNC), {
-    mode: 'no-cors',
     method: ERequestMethod.POST,
-    headers: { ...setToken(token) },
+    headers: {
+      ...setToken(token),
+    },
   });
 };
 

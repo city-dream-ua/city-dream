@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    API_BASE: process.env.API_BASE
+    API_BASE: process.env.API_BASE,
+    API_STATIC: process.env.API_STATIC
   },
   images: {
     domains: [
