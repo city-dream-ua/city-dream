@@ -10,16 +10,17 @@ import (
 
 var (
 	store  = storage.NewS3()
-	dreams []*model.Dream
 )
 
 func Do() error {
+	var dreams []*model.Dream
 	storage.
 		MustGetConn().
 		Joins("Owner").
 		Preload("Manager").
 		Preload("Resources").
 		Preload("Resources.DreamStage").
+		Where("status <> ?", model.ToDoStatus).
 		Find(&dreams)
 
 	o, err := json.Marshal(&dreams)
