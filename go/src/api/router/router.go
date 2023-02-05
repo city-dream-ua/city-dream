@@ -12,8 +12,8 @@ func New() *gin.Engine {
 	router := gin.Default()
 	router.Use(corsMiddleware())
 
-	router.POST("/api/export-trello", handler.ExportStaticApi)
-	router.GET("/api/ping", handler.Ping)
+	router.POST("/export-trello", handler.ExportStaticApi)
+	router.GET("/ping", handler.Ping)
 
 	return router
 }
