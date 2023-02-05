@@ -1,5 +1,10 @@
 package model
 
+import (
+	"gorm.io/gorm"
+	"time"
+)
+
 const ToDoStatus = "To Do"
 
 type Dream struct {
@@ -14,4 +19,7 @@ type Dream struct {
 	Manager     User
 	Status      string
 	Resources   []Resource
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+	DeletedAt   gorm.DeletedAt `gorm:"index"`
 }
