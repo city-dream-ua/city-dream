@@ -2,17 +2,21 @@ package storage
 
 import (
 	"bytes"
+	"fmt"
 	"strings"
+	"time"
 
 	"github.com/City-Dream/backend/config"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/cloudfront"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 )
 
 type s3 struct {
 	sess       *session.Session
 	bucketName string
+	cfId       string
 }
 
 func NewS3() *s3 {
@@ -35,7 +39,7 @@ func NewS3() *s3 {
 	if err != nil {
 		panic(err)
 	}
-	return &s3{sess: sess, bucketName: parts[1]}
+	return &s3{sess: sess, bucketName: parts[1], cfId: cfg.CfId}
 }
 
 func (s s3) Save(path string, content []byte, isPublic bool) error {
@@ -50,6 +54,30 @@ func (s s3) Save(path string, content []byte, isPublic bool) error {
 		Body:   bytes.NewBuffer(content),
 		ACL:    acl,
 	})
+
+	if err != nil {
+		return err
+	}
+
+	cf := cloudfront.New(s.sess)
+	now := time.Now()
+	_, err = cf.CreateInvalidation(&cloudfront.CreateInvalidationInput{
+		DistributionId: aws.String(s.cfId),
+		InvalidationBatch: &cloudfront.InvalidationBatch{
+			CallerReference: aws.String(
+				fmt.Sprintf("apiinvali%d", now.UnixNano())),
+			Paths: &cloudfront.Paths{
+				Quantity: aws.Int64(1),
+				Items: []*string{
+					aws.String("/" + path),
+				},
+			},
+		},
+	})
+
+	if err != nil {
+		return fmt.Errorf(`failed to invalidate "%s" path: %s`, path, err.Error())
+	}
 
 	return err
 }

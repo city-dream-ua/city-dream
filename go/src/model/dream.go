@@ -1,7 +1,7 @@
 package model
 
 type Dream struct {
-	ID          string
+	ID          string `gorm:"primaryKey"`
 	Title       string
 	ShortLink   string
 	CoverImage  string

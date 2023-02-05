@@ -1,7 +1,7 @@
 package model
 
 type Resource struct {
-	ID           string
+	ID           string `gorm:"primaryKey"`
 	Title        string
 	DreamID      string
 	Dream        *Dream

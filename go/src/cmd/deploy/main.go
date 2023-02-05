@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/City-Dream/backend/model/migration"
+	vercelDeploy "github.com/City-Dream/backend/deploy/vercel"
 )
 
 func main() {
-	checkErr(migration.Do())
+	checkErr(vercelDeploy.Do())
 }
 
 func checkErr(err error) {
