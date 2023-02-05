@@ -22,6 +22,6 @@ jobs:
           ssh -i "./key.pem"  -o StrictHostKeyChecking=no ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "rm -rf ~/citydream-app && mkdir ~/citydream-app"
           scp -i "./key.pem" ./deployment.zip ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }}:~/citydream-app
           ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "unzip -o ~/citydream-app/deployment.zip -d ~/citydream-app"
-          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "fuser -k 8980/tcp || true"
+          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "/usr/sbin/fuser -k 8980/tcp || true"
           ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "cp .env ~/citydream-app"
           ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "~/citydream-app/main > /var/log/citydream-api 2>&1 &"
