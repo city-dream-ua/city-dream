@@ -62,6 +62,7 @@ const normalizeTrelloData = (
 };
 
 const API_BASE = process.env.API_BASE;
+const API_STATIC = process.env.API_STATIC;
 
 export const addApiBase = (url: string) => {
   return `${API_BASE}${url}`
@@ -71,7 +72,7 @@ export const setToken = (token: string) => ({ Authorization: `Bearer ${token}`, 
 
 
 export const getProjects = async (token?: string): Promise<ProjectCardProps[] | null> => {
-  const res: TrelloProjectCardProps[] = await fetch(`${API_BASE}/dreams.json`, {
+  const res: TrelloProjectCardProps[] = await fetch(`${API_STATIC}/dreams.json`, {
     headers: new Headers({
       Authorization: `Bearer ${token}`,
     }),
@@ -83,7 +84,7 @@ export const getProjects = async (token?: string): Promise<ProjectCardProps[] | 
 };
 
 export const getProject = async (slug: string, token?: string): Promise<ProjectCardProps | null> => {
-  const res: TrelloProjectCardProps = await fetch(`${API_BASE}/dreams/${slug}.json`, {
+  const res: TrelloProjectCardProps = await fetch(`${API_STATIC}/dreams/${slug}.json`, {
     headers: new Headers({
       Authorization: `Bearer ${token}`,
     }),
