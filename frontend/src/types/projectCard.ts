@@ -9,7 +9,7 @@ export type ResourceProps = {
 export type StepProps = {
   id: string;
   name: string;
-  resources: ResourceProps[]
+  resources: ResourceProps[];
 }
 
 export type ProjectCardProps = {

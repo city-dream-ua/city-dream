@@ -12,39 +12,36 @@ import { Box } from '@mui/system';
 import { Modal } from '@/components';
 import { theme } from '@/themes';
 
-type DreamSupportModalProps = Omit<ModalProps, 'children' | 'onSubmit'> & {
-  dreamId: string;
+type DreamSupportModalProps = Omit<ModalProps, 'children' | 'onSubmit' | 'onChange'> & {
+  onChange: (value: string) => void;
   onSubmit: (value: any) => void;
+  contribution: string;
 }
 
 export const DreamSupportModal: FC<DreamSupportModalProps> = ({
   onSubmit,
-  dreamId,
+  onChange,
+  contribution,
   ...restProps
 }) => {
   const moreSm = useMediaQuery(theme.breakpoints.up('sm'));
-  const [contribute, setContribute] = useState<string>('');
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = ({
     target: { value },
   }) => {
-    setContribute(value);
+    onChange(value);
   };
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    onSubmit(contribute);
-  };
 
   return (
     <Modal {...restProps}>
       <Box minWidth={moreSm ? 360 : 240}>
         <Typography variant={'h3'} mb={3}>Заповніть поле</Typography>
-        <Box component={'form'} onSubmit={handleSubmit}>
+        <Box component={'form'} onSubmit={onSubmit}>
           <Box mb={4}/>
           <TextField
             onChange={handleChange}
-            value={contribute}
+            value={contribution}
             fullWidth
             multiline
             rows={4}

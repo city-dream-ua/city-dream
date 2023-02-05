@@ -51,11 +51,11 @@ export const ProjectCard: FC<ProjectCardProps> = (
           },
         }}
         >
-          <Box sx={{ '& > img': { width: '100%' } }}>
+          <Box width={'100%'} height={200} position={'relative'}>
             <Image
               style={{ objectFit: 'cover', objectPosition: 'center' }}
-              width={300}
-              height={200}
+              fill
+              sizes={'100%'}
               src={src}
               alt={alt}
             />

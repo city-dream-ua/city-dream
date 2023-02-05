@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
@@ -17,15 +17,19 @@ export const Project = () => {
   const { projects, project } = useProjectsProvider();
   const { addAlert } = useAlertContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [contribution, setContribution] = useState<string>('');
   const sessionData = useSession();
 
   const isLessLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setContribution('');
   };
 
-  const handleSubmit = (contribution: string) => {
+  const handleSubmit: ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+
     // @ts-ignore
     const token = sessionData.data?.token;
 
@@ -33,7 +37,7 @@ export const Project = () => {
       TrelloAPI.updateDream(token, project.id, { contribution })
         .then(async (res) => {
           if (res.ok) {
-            setIsModalOpen(false);
+            handleCloseModal();
             addAlert({
               status: EAlertStatus.SUCCESS,
               message: 'Success',
@@ -44,8 +48,13 @@ export const Project = () => {
               message: res.statusText || 'Something went wrong',
             });
           }
-        })
+        });
     }
+  };
+
+  const onCheck = (title: string) => {
+    setIsModalOpen(true);
+    setContribution(title);
   };
 
   return (
@@ -71,7 +80,8 @@ export const Project = () => {
           </Grid>
         </Box>
         <Box>
-          {!!project.steps.length && <DreamSteps steps={project.steps}/>}
+          {!!project.steps.length &&
+            <DreamSteps onChange={onCheck} steps={project.steps}/>}
         </Box>
 
         {projects && (
@@ -86,9 +96,10 @@ export const Project = () => {
       {sessionData?.data?.user ? (
         <DreamSupportModal
           open={isModalOpen}
-          dreamId={project.id}
           onClose={handleCloseModal}
+          onChange={setContribution}
           onSubmit={handleSubmit}
+          contribution={contribution}
         />
       ) : (
         <SignInModal
