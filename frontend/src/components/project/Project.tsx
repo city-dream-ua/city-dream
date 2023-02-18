@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
@@ -26,6 +26,22 @@ export const Project = () => {
     setIsModalOpen(false);
     setContribution('');
   };
+
+  // For dev
+  useEffect(() => {
+    // @ts-ignore
+    const token = sessionData.data?.token;
+    // @ts-ignore
+    const id = sessionData.data?.id;
+
+    if (token && id) {
+      fetch(`https://graph.facebook.com/${id}?fields=id,name,email,link,picture&access_token=${token}`)
+        .then(data => data.json())
+        .then(data => console.log(data))
+    }
+
+    // @ts-ignore
+  }, [sessionData.data?.token])
 
   const handleSubmit: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
