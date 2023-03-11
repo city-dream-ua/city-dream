@@ -11,7 +11,7 @@ export const DrawerMenu = () => {
   return (
     <Box p={4} textAlign={'center'} height={'100%'}>
       <Stack spacing={4} height={'100%'}>
-        <Link href={'/#pro-nas'}>
+        <Link href={'/about-us'}>
           <Typography
             color={'text.light'}
             sx={{ cursor: 'pointer' }}
