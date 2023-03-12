@@ -1,19 +1,18 @@
-import { FC } from 'react';
-
 import Image from 'next/image';
 import { Box } from '@mui/system';
-import { Container, Grid, Typography } from '@mui/material';
+import { Container, Grid, Typography, useMediaQuery } from '@mui/material';
 
 import heroImage from '@/assets/images/cd-hero-image.png';
 import { ButtonShareDream } from '..';
+import { theme } from '@/themes';
 
 
-type HomeHeroProps = {
-  moreMd: boolean;
-  lessLg: boolean;
-};
 
-export const Hero: FC<HomeHeroProps> = ({ moreMd, lessLg }) => {
+export const Hero = () => {
+  const lessLg = useMediaQuery(theme.breakpoints.down('lg'));
+  const moreMd = useMediaQuery(theme.breakpoints.up('md'));
+  const lessMd = useMediaQuery(theme.breakpoints.down('md'))
+
   const descriptionMaxWidth = moreMd ? 440 : 'initial';
   const squareWidth = lessLg ? 24 : 32;
   const squareHeight = squareWidth * 1.5;
@@ -21,7 +20,7 @@ export const Hero: FC<HomeHeroProps> = ({ moreMd, lessLg }) => {
   return (
     <Box bgcolor={'background.paper'} component={'section'}>
       <Container>
-        <Box pt={'90px'} pb={'64px'}>
+        <Box pt={lessMd ? '52px' : '90px'} pb={'64px'}>
           <Grid container columnSpacing={4} >
             <Grid item md={6}>
               <Box maxWidth={descriptionMaxWidth} mb={moreMd ? 0 : 8}>

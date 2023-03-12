@@ -31,7 +31,7 @@ export const NavMenu = () => {
     <>
       <Box display={'flex'} alignItems={'center'} flexGrow={1}>
         <Box>
-          <Link href={'/#pro-nas'}>
+          <Link href={'/about-us'}>
             <Typography
               color={'text.light'}
               sx={{ textDecoration: 'none' }}

@@ -1,13 +1,7 @@
 import { FC } from 'react';
 
-import {
-  Box,
-  Container,
-  Typography,
-  useMediaQuery,
-} from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 
-import { theme } from '@/themes';
 import { ProjectCardProps } from '@/types';
 import { DreamFlow, Hero, ProjectsList } from '@/components';
 
@@ -16,12 +10,9 @@ type HomeProps = {
 }
 
 export const Home: FC<HomeProps> = ({ projects }) => {
-  const lessLg = useMediaQuery(theme.breakpoints.down('lg'));
-  const moreMd = useMediaQuery(theme.breakpoints.up('md'));
-
   return (
     <>
-      <Hero lessLg={lessLg} moreMd={moreMd}/>
+      <Hero/>
       <DreamFlow/>
       {projects && (
         <Box
