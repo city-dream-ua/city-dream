@@ -9,19 +9,19 @@ import mentorImg from '@/assets/images/team-serhii-polishchuk.jpg'
 export const teamData: TeamMember[] = [
   {
     name: 'Денис Андрущенко',
-    position: 'Менеджер проекту',
+    position: 'Менеджер проєкту',
     img: managerImg,
     fbLink: 'https://www.facebook.com/da.orient',
   },
   {
     name: 'Сергій Поліщук',
-    position: 'Ментор проекту',
+    position: 'Ментор проєкту',
     img: mentorImg,
     fbLink: 'https://www.facebook.com/sergey.polischook.3'
   },
   {
     name: 'Єлизавета Буханець',
-    position: 'Комунікаційний менеджер',
+    position: 'Комунікаційна менеджерка',
     img: communicationManger,
     fbLink: 'https://www.facebook.com/Elizaveta.Bukhanets',
   },
@@ -33,8 +33,8 @@ export const teamData: TeamMember[] = [
   },
   {
     name: 'Юлія Сікора',
-    position: 'Дизайнер',
+    position: 'Дизайнерка',
     img: designerImg,
-    fbLink: '',
+    fbLink: 'https://www.facebook.com/julia.sikora.338',
   },
 ];
