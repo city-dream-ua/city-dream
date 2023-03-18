@@ -104,8 +104,7 @@ export const ViewAboutUs = () => (
 
       <Typography variant={'body1'} mb={3}>
         Ви з нами? Тоді заповнюйте&nbsp;
-        <LinkText passHref target={'_blank'}
-                  href={'https://forms.gle/GuNb91jeyCe6QECdA'}>
+        <LinkText target={'_blank'} href={'https://forms.gle/GuNb91jeyCe6QECdA'}>
           анкету
         </LinkText>
         .

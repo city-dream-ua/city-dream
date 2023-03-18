@@ -9,7 +9,7 @@ export const LinkText = ({
   ...restProps
 }: LinkProps & LinkMUIProps) => (
   <Link href={href} target={target}>
-    <LinkMUI {...restProps}>
+    <LinkMUI {...restProps} component={'span'}>
       {children}
     </LinkMUI>
   </Link>
