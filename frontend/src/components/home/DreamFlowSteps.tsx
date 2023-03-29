@@ -63,8 +63,7 @@ const dreamFlowStepsList: FlowStepListProps[] = [
     title: 'Зʼявляються маленькі листочки на дереві',
     text: (
       <Typography>
-        <Typography component={'span'}
-                    fontWeight={700}>Підготовка: </Typography>до компанії<br/>
+        <Typography component={'span'} fontWeight={700}>Підготовка </Typography>до компанії<br/>
         (ми допоможемо оформити проєкт)
       </Typography>
     )
@@ -75,8 +74,8 @@ const dreamFlowStepsList: FlowStepListProps[] = [
     title: 'Дерево починає квітнути',
     text: (
       <Typography>
-        <Typography component={'span'} fontWeight={700}>Старт
-          компанії: </Typography>зі збору ресурсів і волонтерів - успіхів!
+        <Typography component={'span'} fontWeight={700}>Старт кампанії </Typography>
+        зі збору ресурсів і волонтерів - успіхів!
       </Typography>
     )
   },
@@ -86,9 +85,8 @@ const dreamFlowStepsList: FlowStepListProps[] = [
     title: 'Зʼявилися зелені плоди на дереві',
     text: (
       <Typography>
-        Щоб мрія дозрвіла, потрібно <Typography component={'span'}
-                                                fontWeight={700}>активно
-        розповідати про мрію</Typography>
+        Щоб мрія дозріла, потрібно <Typography component={'span'} fontWeight={700}>
+        активно розповідати про мрію</Typography>
       </Typography>
     )
   },
@@ -98,8 +96,8 @@ const dreamFlowStepsList: FlowStepListProps[] = [
     title: 'Плоди поспіли на дереві',
     text: (
       <Typography>
-        <Typography component={'span'} fontWeight={700}>Реалізація
-          мрії</Typography> - наступний крок після 100% залучениї ресурсів
+        <Typography component={'span'} fontWeight={700}>Реалізація мрії
+        </Typography> - наступний крок після 100% залучених ресурсів
       </Typography>
     )
   },
@@ -109,9 +107,8 @@ const dreamFlowStepsList: FlowStepListProps[] = [
     title: 'Зібрати плоди у коробку',
     text: (
       <Typography>
-        Коли проєкт реалізовано, <Typography component={'span'}
-                                             fontWeight={700}>поділітсья
-        результатами </Typography>щоб ниднути інших
+        Коли проєкт реалізовано, <Typography component={'span'} fontWeight={700}>
+        поділіться результатами </Typography>щоб надихнути інших
       </Typography>
     )
   },

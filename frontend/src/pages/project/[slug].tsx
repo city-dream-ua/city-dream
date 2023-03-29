@@ -14,13 +14,16 @@ type ProjectPageProps = {
 }
 
 const ProjectPage: FC<ProjectPageProps> = ({ projects, project }) => {
-  const title = `City dream | ${project?.title || 'Project'}`
+  const title = `City dream | ${project?.title || 'Project'}`;
+  const description = project?.description || '';
 
   return (
     <>
       <Head>
         <title>{title}</title>
-        <meta name="description" content="Project name"/>
+        <meta name="description" content={`${description}`}/>
+        <meta property="og:image" content={project?.src as string}/>
+        <meta property="og:title" content={title}/>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <Layout>
