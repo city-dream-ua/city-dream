@@ -1,11 +1,14 @@
 import { NextFunction, Request, Response, Router } from 'express';
 
+import { getAllDreams, getDream } from "../controllers";
+
 const router: Router = Router();
 
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const dreams = await getAllDreams();
 
-    res.send("All dreams");
+    res.send(dreams);
   } catch (err) {
     next(err);
   }
@@ -13,8 +16,9 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 
 router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const dream = await getDream(req.params.id);
 
-    res.send("One dream");
+    res.send(dream);
   } catch (err) {
     next(err);
   }

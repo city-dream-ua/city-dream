@@ -1,7 +1,10 @@
 .idea
 
 #build folder
-./dist
+/dist
 
+/logs
 
-./node_modules
+/node_modules
+
+.env
