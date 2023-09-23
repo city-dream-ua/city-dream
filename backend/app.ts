@@ -17,7 +17,7 @@ app.use(cors({
   origin: ['http://localhost:3000', 'https://www.citydream.pp.ua/'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: '*',
-  credentials: true
+  // credentials: true
 }));
 
 app.use(cookieParser());
