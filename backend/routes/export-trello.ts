@@ -15,7 +15,6 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     } else {
       throw new HttpError(StatusCodes.FORBIDDEN, "Can't synchronize data, please try again later");
     }
-
   } catch (err) {
     next(err);
   }

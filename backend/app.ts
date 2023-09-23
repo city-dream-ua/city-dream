@@ -1,6 +1,7 @@
 import express from 'express';
 
 import http from 'http';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 
@@ -11,6 +12,8 @@ import { exceptionFilter } from './common/errors';
 import router from './routes'
 
 const app = express();
+
+app.use(cors());
 
 app.use(cookieParser());
 
