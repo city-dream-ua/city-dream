@@ -22,9 +22,9 @@ jobs:
         run: |
           echo "${{ secrets.AWS_SERVER_KEY }}" > key.pem
           chmod 400 ./key.pem
-          ssh -o StrictHostKeyChecking=no -i "./key.pem" ${{ vars.AWS_NODE_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "rm -rf /var/www/myapp/*"
-          scp -o StrictHostKeyChecking=no -i "./key.pem" -r ./backend/dist/* ${{ vars.AWS_NODE_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }}:/var/www/myapp/
-          ssh -o StrictHostKeyChecking=no -i "./key.pem" ${{ vars.AWS_NODE_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "
+          ssh -i "./key.pem" ${{ vars.AWS_NODE_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "rm -rf /var/www/myapp/*"
+          scp -i "./key.pem" -r ./backend/dist/* ${{ vars.AWS_NODE_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }}:/var/www/myapp/
+          ssh -i "./key.pem" ${{ vars.AWS_NODE_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "
             cd /var/www/myapp &&
             export DB_LINK=${{ secrets.DB_LINK }} &&
             export TRELLO_TOKEN=${{ secrets.TRELLO_TOKEN }} &&
