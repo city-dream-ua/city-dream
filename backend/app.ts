@@ -13,7 +13,12 @@ import router from './routes'
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://www.citydream.pp.ua/'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: '*',
+  credentials: true
+}));
 
 app.use(cookieParser());
 
