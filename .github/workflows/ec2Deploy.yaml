@@ -1,27 +1,58 @@
 name: deploy lambda
 on: [push]
 jobs:
-  build-and-deploy:
+#  build-and-deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0
+#
+#      - name: Build docker images
+#        run: docker build -t local - < ./.github/workflows/Dockerfile
+#
+#      - name: Build app
+#        run: docker run -v $PWD:/srv -w/srv local bash -c "cd /srv/go/src && bash api/local/build.sh"
+#
+#      - name: Deploy app
+#        run: |
+#          cd go/src
+#          echo "${{ secrets.AWS_SERVER_KEY }}" > key.pem
+#          chmod 600 ./key.pem
+#          ssh -i "./key.pem"  -o StrictHostKeyChecking=no ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "rm -rf ~/citydream-app && mkdir ~/citydream-app"
+#          scp -i "./key.pem" ./deployment.zip ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }}:~/citydream-app
+#          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "unzip -o ~/citydream-app/deployment.zip -d ~/citydream-app"
+#          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "/usr/sbin/fuser -k 8980/tcp || true"
+#          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "cp .env ~/citydream-app"
+#          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "~/citydream-app/main > /var/log/citydream-api 2>&1 &"
+
+  deploy-backend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          fetch-depth: 0
+          node-version: '14' # Adjust with your Node.js version
 
-      - name: Build docker images
-        run: docker build -t local - < ./.github/workflows/Dockerfile
-
-      - name: Build app
-        run: docker run -v $PWD:/srv -w/srv local bash -c "cd /srv/go/src && bash api/local/build.sh"
-
-      - name: Deploy app
+      - name: Install dependencies and build
         run: |
-          cd go/src
-          echo "${{ secrets.AWS_SERVER_KEY }}" > key.pem
-          chmod 600 ./key.pem
-          ssh -i "./key.pem"  -o StrictHostKeyChecking=no ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "rm -rf ~/citydream-app && mkdir ~/citydream-app"
-          scp -i "./key.pem" ./deployment.zip ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }}:~/citydream-app
-          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "unzip -o ~/citydream-app/deployment.zip -d ~/citydream-app"
-          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "/usr/sbin/fuser -k 8980/tcp || true"
-          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "cp .env ~/citydream-app"
-          ssh -i "./key.pem" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_SERVER_IP }} "~/citydream-app/main > /var/log/citydream-api 2>&1 &"
+          cd ./city-dream/backend
+          npm ci
+          npm run build
+
+      - name: Deploy to EC2
+        run: |
+          echo "${{ secrets.AWS_SERVER_KEY }}" > key.cer
+          ssh -o StrictHostKeyChecking=no -i "./key.cer" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "rm -rf /var/www/myapp/*"
+          scp -o StrictHostKeyChecking=no -i "./key.cer" -r ./city-dream/backend/dist/* ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }}:/var/www/myapp/
+          ssh -o StrictHostKeyChecking=no -i "./key.cer" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "
+            cd /var/www/myapp &&
+            export DB_LINK=${{ secrets.DB_LINK }} &&
+            export TRELLO_TOKEN=${{ secrets.TRELLO_TOKEN }} &&
+            export TRELLO_APP_KEY=${{ secrets.TRELLO_APP_KEY }} &&
+            export TRELLO_BOARD_ID=${{ secrets.TRELLO_BOARD_ID }} &&
+            pm2 restart nodeserver
+          "
