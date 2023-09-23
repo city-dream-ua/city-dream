@@ -6,7 +6,7 @@ export const projectsContext = createContext<{
   projects: ProjectCardProps[] | null;
 }>({
   project: {
-    id: '',
+    _id: '',
     src: '',
     alt: '',
     title: '',

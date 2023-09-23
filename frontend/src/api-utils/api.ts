@@ -11,7 +11,8 @@ const updateDream = (token: string, id: string, data: { contribution: string; })
 
 const syncTrello = (token: string): Promise<Response> => {
   return fetch(addApiBase(Api.trello.SYNC), {
-    method: ERequestMethod.POST,
+    // TODO: replace with POST method
+    method: ERequestMethod.GET,
     headers: { ...setToken(token) },
   });
 };

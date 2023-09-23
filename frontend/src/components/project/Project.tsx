@@ -50,7 +50,7 @@ export const Project = () => {
     const token = sessionData.data?.token;
 
     if (token) {
-      TrelloAPI.updateDream(token, project.id, { contribution })
+      TrelloAPI.updateDream(token, project._id, { contribution })
         .then(async (res) => {
           if (res.ok) {
             handleCloseModal();
@@ -103,7 +103,7 @@ export const Project = () => {
         {projects && (
           <Box component={'section'} mt={'84px'}>
             <ProjectsList projects={
-              projects.filter(({ id }) => id !== project.id).slice(0, 4)
+              projects.filter(({ _id }) => _id !== project._id).slice(0, 4)
             }/>
           </Box>
         )}
