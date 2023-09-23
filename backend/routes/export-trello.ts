@@ -6,7 +6,7 @@ import {StatusCodes} from "../types";
 
 const router: Router = Router();
 
-router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const trelloRes = await getCardData();
 
