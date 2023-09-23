@@ -20,7 +20,7 @@ export const ButtonSyncWithTrello: FC<ButtonProps> = ({
 
     if (token) {
       TrelloAPI.sync(token).then(res => {
-          if (res.ok) {
+        if (res.ok) {
           addAlert({
             status: EAlertStatus.SUCCESS,
             message: 'Site successfully synchronized with Trello',
@@ -31,8 +31,13 @@ export const ButtonSyncWithTrello: FC<ButtonProps> = ({
             message: res.statusText || 'Something went wrong during the synchronization',
           });
         }
-        setDisabled(false);
-      })
+
+      }).catch((e) => {
+        addAlert({
+          status: EAlertStatus.ERROR,
+          message: e?.message || 'Something went wrong during the synchronization',
+        });
+      }).finally(() => setDisabled(false));
     }
   };
 

@@ -1,22 +1,22 @@
 import { StaticImageData } from 'next/image';
 
 export type ResourceProps = {
-  id: string;
+  _id: string;
   title: string;
   status: 'incomplete' | 'complete';
 }
 
 export type StepProps = {
-  id: string;
+  _id: string;
   name: string;
   resources: ResourceProps[];
 }
 
 export type ProjectCardProps = {
-  id: string;
-  src: string | StaticImageData;
-  alt: string;
+  _id: string;
   title: string;
+  alt: string;
+  src: string | StaticImageData;
   authorAvatar: string;
   authorFirstName: string;
   authorLastName: string;
