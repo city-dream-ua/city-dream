@@ -1,4 +1,4 @@
-export declare enum StatusCodes {
+export declare const enum StatusCodes {
 
   /**
    * The server has received the request headers and the client should proceed to send the request body
