@@ -23,7 +23,7 @@ jobs:
           set -euxo pipefail
           echo "${{ secrets.AWS_NODE_SERVER_KEY }}" > key.cer
           chmod 400 ./key.cer
-          ssh -i "./key.cer" -o StrictHostKeyChecking=no ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "[ -d ~/app ] && rm -rf ~/app/*"
+          ssh -i "./key.cer" -o StrictHostKeyChecking=no ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "[ -d ~/app ] && rm -rf ~/app"
           scp -i "./key.cer" -o StrictHostKeyChecking=no -r ./backend/dist/* ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }}:~/app
           ssh -i "./key.cer" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "
             cd ~/app &&
