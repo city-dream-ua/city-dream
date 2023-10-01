@@ -22,15 +22,15 @@ jobs:
         run: |
           echo "${{ secrets.AWS_NODE_SERVER_KEY }}" > key.cer
           chmod 400 ./key.cer
-          ssh -i "./key.cer" -o StrictHostKeyChecking=no ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "rm -rf /var/www/myapp/*"
-          scp -i "./key.cer" -o StrictHostKeyChecking=no -r ./backend/dist/* ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }}:/var/www/myapp/
+          ssh -i "./key.cer" -o StrictHostKeyChecking=no ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "[ -d ~/app] && rm -rf ~/app/*"
+          scp -i "./key.cer" -o StrictHostKeyChecking=no -r ./backend/dist/* ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }}:~/app
           ssh -i "./key.cer" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "
-            cd /var/www/myapp &&
+            cd ~/app &&
             export DB_LINK=${{ secrets.DB_LINK }} &&
             export TRELLO_TOKEN=${{ secrets.TRELLO_TOKEN }} &&
             export TRELLO_APP_KEY=${{ secrets.TRELLO_APP_KEY }} &&
             export TRELLO_BOARD_ID=${{ secrets.TRELLO_BOARD_ID }} &&
-            pm2 start /var/www/myapp/app.js
+            pm2 start ~/app/app.js
           "
 
 #  build-and-deploy:
