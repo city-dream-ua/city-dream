@@ -30,7 +30,7 @@ jobs:
             export TRELLO_TOKEN=${{ secrets.TRELLO_TOKEN }} &&
             export TRELLO_APP_KEY=${{ secrets.TRELLO_APP_KEY }} &&
             export TRELLO_BOARD_ID=${{ secrets.TRELLO_BOARD_ID }} &&
-            pm2 restart nodeserver
+            pm2 reload nodeserver
           "
 
 #  build-and-deploy:
