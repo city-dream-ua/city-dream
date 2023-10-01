@@ -20,12 +20,11 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          set -euxo pipefail
           echo "${{ secrets.AWS_NODE_SERVER_KEY }}" > key.cer
           chmod 400 ./key.cer
-          ssh -i "./key.cer" -o StrictHostKeyChecking=no ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "mkdir ~/app"
-          scp -i "./key.cer" -o StrictHostKeyChecking=no -r ./backend/dist/* ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }}:~/app
-          ssh -i "./key.cer" ${{ vars.AWS_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "
+          ssh -i "./key.cer" -o StrictHostKeyChecking=no ${{ vars.AWS_NODE_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "mkdir ~/app"
+          scp -i "./key.cer" -o StrictHostKeyChecking=no -r ./backend/dist/* ${{ vars.AWS_NODE_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }}:~/app
+          ssh -i "./key.cer" ${{ vars.AWS_NODE_SERVER_USER }}@${{ vars.AWS_NODE_SERVER_IP }} "
             cd ~/app &&
             export DB_LINK=${{ secrets.DB_LINK }} &&
             export TRELLO_TOKEN=${{ secrets.TRELLO_TOKEN }} &&
